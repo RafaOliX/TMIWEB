@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Surprise Model Management Women
 
 ## Project Overview
@@ -36,3 +37,6 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## License
 This project is licensed under the MIT License.
+=======
+# TMIWEB
+>>>>>>> 926c2c3ed4b5e5c1da81ae6aa0c023834d4f6db1
