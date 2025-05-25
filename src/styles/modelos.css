@@ -5,6 +5,7 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
+
 }
 
 header {
@@ -96,6 +97,11 @@ header {
   word-break: break-word;
   position: relative;
   overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffffec;
 }
 
 .img-container {

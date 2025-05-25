@@ -1,0 +1,71 @@
+[
+  {
+    "id": "miranda",
+    "nombre": "Miranda",
+    "foto": "src/assets/modelos/Miranda/miranda.avif",
+    "cabello": "Red Hair",
+    "peso": "56-60 kg",
+    "altura": "166-170 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "sofia",
+    "nombre": "Sofia",
+    "foto": "src/assets/modelos/Sofia/sofia.avif",
+    "cabello": "Blonde Hair",
+    "peso": "50-55 kg",
+    "altura": "160-165 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "elie",
+    "nombre": "Elie",
+    "foto": "src/assets/modelos/Elie/elie.avif",
+    "cabello": "Brown Hair",
+    "peso": "55-60 kg",
+    "altura": "165-170 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "camila",
+    "nombre": "Camila",
+    "foto": "src/assets/modelos/Camila/camila.avif",
+    "cabello": "Black Hair",
+    "peso": "50-55 kg",
+    "altura": "160-165 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "ruth",
+    "nombre": "Ruth",
+    "foto": "src/assets/modelos/Ruth/ruth.avif",
+    "cabello": "Brown Hair",
+    "peso": "55-60 kg",
+    "altura": "165-170 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "meily",
+    "nombre": "Meily",
+    "foto": "src/assets/modelos/Meily/meily.avif",
+    "cabello": "Black Hair",
+    "peso": "50-55 kg",
+    "altura": "160-165 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+
+  },
+  {
+    "id": "anya",
+    "nombre": "Anya",
+    "foto": "src/assets/modelos/Anya/anya.avif",
+    "cabello": "Black Hair",
+    "peso": "50-55 kg",
+    "altura": "160-165 cm",
+    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+}
+]
