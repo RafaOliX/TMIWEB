@@ -19,6 +19,10 @@ h1 {
   letter-spacing: 2px;
 }
 
+header {
+    z-index: 100000;
+}
+
 .subtitle {
   font-size: 1.2em;
   color: #fff;
@@ -26,7 +30,6 @@ h1 {
   text-align: center;
 }
 
-/* Galería principal: 4 columnas, alternando foto/texto */
 .gallery-2x2 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -34,9 +37,8 @@ h1 {
   align-items: stretch;
   margin-top: 1rem;
   width: 100%;
-  max-width: 16000px;
-  margin: 10px;
-  margin-left: 100px;
+  max-width: 100%; 
+  margin: 10px auto; 
 }
 
 /* Cada modelo: foto y texto en columnas alternas */
@@ -67,25 +69,27 @@ h1 {
 .model-info {
   flex-direction: column;
   justify-content: center;
-  align-items:normal;
+  align-items:center;
   width: 100%;
-  max-width: 30%;
+  max-width: 100vw;
   height: auto;
-  max-height: fit-content;
-  padding: 0 5rem;
-  color: #fff;
+  padding: 0;
+  color: #ffffffec;
   background: none;
   z-index: 3;
   position: relative;
+  overflow: hidden; /* Esto evita que el zoom se salga */
   font-size: 1.1vw;
   text-align: left;
+  transition: transform 0.7s cubic-bezier(0, 0, .58, 1);
+  transform-origin: center center;
 }
 
 .model-info h2 {
   font-size: 2vw;
   font-weight: 900;
   margin: 0 0 1rem 0;
-  color: #fff;
+  color: #ffffffec;
   letter-spacing: 2px;
   line-height: 1.1;
   text-shadow: 0 2px 8px #000;
@@ -126,17 +130,9 @@ h1 {
 
 .model-info:hover, 
 .model-info:focus-within {
-    transform: scale(1.05);
-  transition: transform 0.7s cubic-bezier(0, 0, .58, 1);
-  transform-origin: left top;
-  object-fit: cover;
-  background-color: rgba(211, 211, 211, 0.63) ;
-    overflow: hidden;
-      position: relative;
+  transform: scale(1.05);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.562) 0%, rgba(255, 255, 255, 0) 70%);
   z-index: 1;
-
-
-  
 }
 
 .model-info p {
@@ -188,6 +184,7 @@ h1 {
   -webkit-box-align: start;
   -webkit-box-orient: vertical;   
 }
+
 .img-overlay {
   position: absolute;
   left: 0;
@@ -210,89 +207,34 @@ h1 {
   opacity: 1;
 }
 
+.model-info {
+  position: relative;
+  overflow: hidden;
+}
 
-/* --- RESPONSIVE --- */
+.model-info-overlay {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, rgba(228, 228, 228, 0.35) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s cubic-bezier(0, 0, .58, 1);
+  z-index: 2;
+}
 
-/* Responsive: 2 columnas en tablet, 1 columna en móvil */
-@media (max-width: 600px) {
-  .gallery-2x2 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 1.2rem;
-    max-width: 98vw;
-  }
-  .model-info {
-    font-size: 2.2vw;
-    padding: 0 0.5rem;
-  }
-  .model-info h2 {
-    font-size: 3vw;
-  }
-  .model-photo .img-container {
-    max-width: 98vw;
-    aspect-ratio: 4/5;
-  }
+.model-info:hover .model-info-overlay,
+.model-info:focus-within .model-info-overlay {
+  opacity: 1;
+  background-color: #0000000a;
 }
 
 
-
-
-@media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 5px 0 5px;
-  }
-  .logo {
-    font-size: 1.1rem;
-  }
-  .menu {
-    flex-direction: column;
-    width: 100%;
-    background-color: #E60012;
-  }
-  .menu li a {
-    padding: 10px;
-    font-size: 1em;
-  }
-  .subtitle {
-    font-size: 1em;
-    margin-bottom: 15px;
-  }
+.cell {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
-/* Menú hamburguesa para móvil */
-@media screen and (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  .menu {
-    flex-direction: column;
-    display: none;
-    width: 100%;
-    background-color: #E60012;
-  }
-  .menu-divider {
-    width: 100%;
-    height: 2px;
-    margin: 10px 0;
-    background: #444;
-    display: block;
-  }
-  .menu li {
-    width: 100%;
-  }
-  .menu li a {
-    text-align: center;
-    padding: 15px;
-  }
-  #menu-toggle:checked + .menu {
-    display: flex;
-  }
-  .menu-icon {
-    display: block;
-  }
-}

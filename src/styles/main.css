@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    overflow-x: hidden;
 }
 
 header {
@@ -100,6 +101,9 @@ nav {
   display: none;
 }
 
+#menu-toggle:checked ~ .menu {
+  display: flex;
+}
 
 
 
@@ -158,26 +162,7 @@ nav {
 
 /* --- RESPONSIVE --- */
 
-/* Responsive: 2 columnas en tablet, 1 columna en móvil */
-@media (max-width: 600px) {
-  .gallery-2x2 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 1.2rem;
-    max-width: 98vw;
-  }
-  .model-info {
-    font-size: 2.2vw;
-    padding: 0 0.5rem;
-  }
-  .model-info h2 {
-    font-size: 3vw;
-  }
-  .model-photo .img-container {
-    max-width: 98vw;
-    aspect-ratio: 4/5;
-  }
-}
-
+/* Responsive: 2 columnas en tablet y 2 columnas en móvil */
 
 
 
