@@ -244,3 +244,16 @@ a {
   display: flex;
 }
 
+/* ...existing code... */
+
+/* Responsive: 2 columnas en pantallas pequeñas */
+@media (max-width: 767px) {
+  .gallery-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+  }
+  .model-info h2,
+  .model-info p {
+    font-size: 4vw;
+  }
+}
