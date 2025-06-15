@@ -36,15 +36,49 @@
 
 
 
-<section class="relative overflow-hidden min-h-[88dvh] flex items-center justify-center">
-    <!-- Video de fondo -->
-    <video class="absolute top-0 left-0 w-full h-full object-cover z-0" autoplay loop muted playsinline src="src/assets/inicio/inicio-video.mp4"></video>
-    <!-- Overlay opcional para oscurecer el video -->
-    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
-    <div class="relative z-20 flex flex-col items-center justify-center w-full">
-        <h1 class="text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white text-center">THE MODEL ISSUE</h1>
+
+<main class="bg-[#1D1D1D] py-30 text-white min-h-screen">
+  <h1 class="text-4xl font-bold text-gray-100 text-center m-8">CONTACTO</h1>
+
+  <div class="bg-[#262626] py-12 px-10 rounded-lg shadow-lg max-w-4xl mx-auto text-gray-100">
+
+    <!-- Formulario en fondo blanco -->
+    <div class="bg-white text-gray-900 rounded-lg shadow-xl p-8 mx-auto max-w-xl">
+      <h2 class="text-2xl font-bold mb-6 text-center">Envíanos tu mensaje</h2>
+      <form id="contactForm" class="space-y-5">
+        <input type="text" name="name" placeholder="Tu nombre" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        
+        <input type="email" name="email" placeholder="Tu correo" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        
+        <input type="text" name="title" placeholder="Asunto" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        
+        <textarea name="message" rows="4" placeholder="Escribe tu mensaje..." required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-all">
+          Enviar
+        </button>
+      </form>
     </div>
-</section>
+  </div>
+</main>
+
+<!-- EmailJS: integración -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("k5HZYwpQJ1tjjBPS_"); // Tu Public Key
+  })();
+
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.sendForm("service_TMIContacto", "template_ContactoTMI", this)
+      .then(() => alert("¡Mensaje enviado correctamente!"))
+      .catch(err => alert("Error al enviar: " + err.text));
+  });
+</script>
+
+
 
 <footer class="bg-black bg-opacity-80 text-white py-6">
     <div class="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
