@@ -37,46 +37,241 @@
 
 
 
-<main class="bg-[#1D1D1D] py-30 text-white min-h-screen">
-  <h1 class="text-4xl font-bold text-gray-100 text-center m-8">CONTACTO</h1>
+<section class="bg-[#f5f5f5] py-20 px-6 text-gray-800">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
 
-  <div class="bg-[#262626] py-12 px-10 rounded-lg shadow-lg max-w-4xl mx-auto text-gray-100">
+    <!-- Columna de advertencia -->
+    <div class="bg-white rounded-md shadow-md p-8 border border-gray-300 text-sm leading-relaxed">
+      <h2 class="text-2xl font-bold mb-4">Contáctanos</h2>
+      <p class="mb-4">Por favor llenar los datos que se le piden</p>
+      <p class="mb-4">, foto polas correspondiente en ropa negra con fondo de pared blanco, queremos ver tus perfiles!</p>
+      <p class="mb-4">Al ser seleccionado por la agencia se le informará a través de nuestro correo oficial o numero telefónico:</p>
+      <ul class="space-y-1">
+        <li>✉️ <strong>themodelissueclass@gmail.com</strong></li>
+        <li>📞 <strong>+58 04128703811</strong></li>
+      </ul>
+    </div>
+ 
+ 
+ 
+ 
+    <!-- Columna derecha: Formulario -->
+    <div class="bg-white rounded-md shadow-md p-8 border border-gray-300">
+      <h2 class="text-2xl font-bold mb-6 text-center tracking-wide">Formulario de Aplicación</h2>
+      
+      <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data">
 
-    <!-- Formulario en fondo blanco -->
-    <div class="bg-white text-gray-900 rounded-lg shadow-xl p-8 mx-auto max-w-xl">
-      <h2 class="text-2xl font-bold mb-6 text-center">Envíanos tu mensaje</h2>
-      <form id="contactForm" class="space-y-5">
-        <input type="text" name="name" placeholder="Tu nombre" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        
-        <input type="email" name="email" placeholder="Tu correo" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        
-        <input type="text" name="title" placeholder="Asunto" required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        
-        <textarea name="message" rows="4" placeholder="Escribe tu mensaje..." required class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-        
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-all">
-          Enviar
+        <!-- 1. Género -->
+        <div>
+          <label class="block font-medium mb-1">Género</label>
+          <div class="flex gap-4">
+            <label><input type="radio" name="genero" value="Mujer" required> Mujer</label>
+            <label><input type="radio" name="genero" value="Hombre"> Hombre</label>
+            <label><input type="radio" name="genero" value="No Binario"> No binario</label>
+          </div>
+        </div>
+
+        <!-- 2. Nombre -->
+        <div>
+          <label class="block font-medium mb-1">Nombre y Apellido</label>
+          <input type="text" name="name" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 3. Altura -->
+        <div>
+          <label class="block font-medium mb-1">Altura (cm)</label>
+          <input type="number" name="altura" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 4. Edad -->
+        <div>
+          <label class="block font-medium mb-1">Edad</label>
+          <input type="number" name="edad" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 5. Instagram -->
+        <div>
+          <label class="block font-medium mb-1">Instagram</label>
+          <input type="text" name="instagram" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 6. País / Región -->
+        <div>
+          <label class="block font-medium mb-1">País o Región</label>
+          <input type="text" name="region" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 7. Correo -->
+        <div>
+          <label class="block font-medium mb-1">Correo Electrónico</label>
+          <input type="email" name="email" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- 8. Fotos Polas -->
+        <div class="space-y-6">
+  <label class="block font-semibold text-base mb-4">Fotos Polas (requeridas)</label>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+
+    <!-- Rostro -->
+    <div>
+      <label for="foto_retrato" class="cursor-pointer group">
+        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+          <img id="preview_foto_retrato" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Rostro frontal"
+            class="w-full h-full object-cover" />
+          <input type="file" name="foto_retrato" id="foto_retrato" accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_retrato')" />
+        </div>
+        <div class="text-sm mt-2">📸 Rostro de frente</div>
+      </label>
+    </div>
+
+    <!-- Cuerpo completo -->
+    <div>
+      <label for="foto_cuerpo_completo" class="cursor-pointer group">
+        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+          <img id="preview_foto_cuerpo" src="https://images.pexels.com/photos/7679723/pexels-photo-7679723.jpeg" alt="Cuerpo completo"
+            class="w-full h-full object-cover" />
+          <input type="file" name="foto_cuerpo_completo" id="foto_cuerpo_completo" accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_cuerpo')" />
+        </div>
+        <div class="text-sm mt-2">📸 Cuerpo completo</div>
+      </label>
+    </div>
+
+    <!-- Mitad cintura -->
+    <div>
+      <label for="foto_mitad_cintura" class="cursor-pointer group">
+        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+          <img id="preview_foto_cintura" src="https://images.pexels.com/photos/1441150/pexels-photo-1441150.jpeg" alt="Mitad de cintura"
+            class="w-full h-full object-cover" />
+          <input type="file" name="foto_mitad_cintura" id="foto_mitad_cintura" accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_cintura')" />
+        </div>
+        <div class="text-sm mt-2">📸 Mitad de cintura</div>
+      </label>
+    </div>
+
+    <!-- Perfil derecho -->
+    <div>
+      <label for="foto_lado_derecho" class="cursor-pointer group">
+        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+          <img id="preview_foto_derecho" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil derecho"
+            class="w-full h-full object-cover" />
+          <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
+        </div>
+        <div class="text-sm mt-2">📸 Perfil derecho</div>
+      </label>
+    </div>
+
+    <!-- Perfil izquierdo -->
+    <div>
+      <label for="foto_lado_izquierdo" class="cursor-pointer group">
+        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+          <img id="preview_foto_izquierdo" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil izquierdo"
+            class="w-full h-full object-cover" />
+          <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_izquierdo')" />
+        </div>
+        <div class="text-sm mt-2">📸 Perfil izquierdo</div>
+      </label>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+
+</div>
+
+
+
+<script>
+  const form = document.getElementById('contactForm');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    // Genera un objeto con archivos base64 para enviarlos a Apps Script
+    const prepararArchivo = async (file) => {
+      const reader = new FileReader();
+      return new Promise((resolve) => {
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          resolve({
+            data: base64,
+            filename: file.name,
+            mimetype: file.type
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    };
+
+    const filesObj = {
+      foto_retrato: await prepararArchivo(formData.get('foto_retrato')),
+      foto_cuerpo_completo: await prepararArchivo(formData.get('foto_cuerpo_completo')),
+      foto_mitad_cintura: await prepararArchivo(formData.get('foto_mitad_cintura')),
+      foto_lado_derecho: await prepararArchivo(formData.get('foto_lado_derecho')),
+      foto_lado_izquierdo: await prepararArchivo(formData.get('foto_lado_izquierdo'))
+    };
+
+    // Extrae los campos de texto
+    const textData = {};
+    formData.forEach((value, key) => {
+      if (!key.startsWith('foto_')) {
+        textData[key] = value;
+      }
+    });
+
+    const payload = {
+      ...textData,
+      files: filesObj
+    };
+
+    const endpoint = 'https://script.google.com/macros/s/AKfycbxZjzWE0F9QhzvgctSCM0gGvdySjD4Hn87AzxUEmdVpy80xD0eTyT5-dE-lX83_hEwNEg/exec'; // ← reemplaza con tu Web App URL
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const resultado = await res.text();
+      alert(resultado);
+      form.reset();
+    } catch (err) {
+      alert('Error al enviar: ' + err.message);
+    }
+  });
+</script>
+
+
+
+        <button type="submit" class="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-md font-semibold tracking-wide transition">
+          Enviar Aplicación
         </button>
       </form>
     </div>
+
   </div>
-</main>
+</section>
 
-<!-- EmailJS: integración -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <script>
-  (function(){
-    emailjs.init("k5HZYwpQJ1tjjBPS_"); // Tu Public Key
-  })();
-
-  document.getElementById("contactForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    emailjs.sendForm("service_TMIContacto", "template_ContactoTMI", this)
-      .then(() => alert("¡Mensaje enviado correctamente!"))
-      .catch(err => alert("Error al enviar: " + err.text));
-  });
+  function preview(input, targetId) {
+    const file = input.files[0];
+    if (file) {
+      document.getElementById(targetId).src = URL.createObjectURL(file);
+    }
+  }
 </script>
+
 
 
 
