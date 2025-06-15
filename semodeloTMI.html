@@ -200,24 +200,30 @@
   </div>
 </section>
 <script>
-form.addEventListener('submit', async function (e) {
-  e.preventDefault();
-  const formData = new FormData(form);
+  const form = document.getElementById('contactForm');
 
-  try {
-    const res = await fetch('https://script.google.com/macros/s/AKfycbyCP7uSDLxAQvGBfvGr-1CDosTMx08iiRVBupKkHABglX9vnZJYYz-kaqQzL9lBnm_QCA/exec', {
-      method: 'POST',
-      body: formData
-    });
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
 
-    const result = await res.text();
-    alert(result);
-    form.reset();
-  } catch (err) {
-    alert("Error al enviar: " + err.message);
-  }
-});
+    try {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbyCP7uSDLxAQvGBfvGr-1CDosTMx08iiRVBupKkHABglX9vnZJYYz-kaqQzL9lBnm_QCA/exec', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await res.text();
+
+      // Mostrar alerta con la respuesta del servidor
+      alert(result);
+
+      form.reset();
+    } catch (err) {
+      alert("❌ Error al enviar: " + err.message);
+    }
+  });
 </script>
+
 
 <script>
   function preview(input, targetId) {
