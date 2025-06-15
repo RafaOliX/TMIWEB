@@ -199,28 +199,24 @@
 
   </div>
 </section>
-
 <script>
-  const form = document.getElementById('contactForm');
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+  try {
+    const res = await fetch('https://script.google.com/macros/s/AKfycbxZjzWE0F9QhzvgctSCM0gGvdySjD4Hn87AzxUEmdVpy80xD0eTyT5-dE-lX83_hEwNEg/exec', {
+      method: 'POST',
+      body: formData
+    });
 
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbxZjzWE0F9QhzvgctSCM0gGvdySjD4Hn87AzxUEmdVpy80xD0eTyT5-dE-lX83_hEwNEg/exec", {
-        method: "POST",
-        body: formData
-      });
-
-      const text = await res.text();
-      alert(text);
-      form.reset();
-    } catch (err) {
-      alert("Error al enviar: " + err.message);
-    }
-  });
+    const result = await res.text();
+    alert(result);
+    form.reset();
+  } catch (err) {
+    alert("Error al enviar: " + err.message);
+  }
+});
 </script>
 
 <script>
