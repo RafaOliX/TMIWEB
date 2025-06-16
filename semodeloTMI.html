@@ -201,69 +201,27 @@
 </section>
 
 
-
 <script>
-  const form = document.getElementById('contactForm');
+const form = document.getElementById('contactForm');
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
 
-    const formData = new FormData(form);
+  const formData = new FormData(form);
 
-    // Función para convertir archivos a base64
-    const convertirArchivo = async (file) => {
-      const reader = new FileReader();
-      return new Promise((resolve) => {
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          resolve({
-            data: base64,
-            filename: file.name,
-            mimetype: file.type
-          });
-        };
-        reader.readAsDataURL(file);
-      });
-    };
-
-    // Procesar imágenes del formulario
-    const archivos = {
-      foto_retrato: await convertirArchivo(formData.get('foto_retrato')),
-      foto_cuerpo_completo: await convertirArchivo(formData.get('foto_cuerpo_completo')),
-      foto_mitad_cintura: await convertirArchivo(formData.get('foto_mitad_cintura')),
-      foto_lado_derecho: await convertirArchivo(formData.get('foto_lado_derecho')),
-      foto_lado_izquierdo: await convertirArchivo(formData.get('foto_lado_izquierdo'))
-    };
-
-    // Campos de texto
-    const campos = {};
-    formData.forEach((valor, clave) => {
-      if (!clave.startsWith('foto_')) {
-        campos[clave] = valor;
-      }
+  try {
+    const res = await fetch('https://script.google.com/macros/s/AKfycbwFXRsgenrMv9t-oniKrc1Jf5ZJabf7S39jFBaYmNzRsTuwfYRaNeatnTKXQB1wHTEK5Q/exec', {
+      method: 'POST',
+      body: formData // No pongas headers, el navegador los pone automáticamente
     });
 
-    const payload = {
-      ...campos,
-      files: archivos
-    };
-
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbyp8rsSO7-yt-e3zXjAscVEh3Rb1VQ9afC3hpZuuBxQ9sNgTh4N8JqTnJhuim5IkaGtqg/exec', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      const respuesta = await res.text();
-      alert(respuesta);
-      form.reset();
-    } catch (err) {
-      alert('❌ Error al enviar: ' + err.message);
-    }
-  });
+    const respuesta = await res.text();
+    alert(respuesta);
+    form.reset();
+  } catch (err) {
+    alert('❌ Error al enviar: ' + err.message);
+  }
+});
 </script>
 
 
