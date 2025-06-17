@@ -1,7 +1,7 @@
 import formidable from 'formidable';
-import fs from 'fs';
 import nodemailer from 'nodemailer';
-import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
+// iptk ebko ugiw bqps
 
 export const config = {
   api: {
@@ -9,20 +9,13 @@ export const config = {
   },
 };
 
-// Configura Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).send('Method Not Allowed');
     return;
   }
 
-  const form = new formidable.IncomingForm({ uploadDir: './tmp', keepExtensions: true });
+  const form = new formidable.IncomingForm({ uploadDir: '/tmp', keepExtensions: true });
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
@@ -31,33 +24,29 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Sube los archivos a Cloudinary y guarda los enlaces
-      const fileLinks = [];
+      // Prepara los adjuntos
+      const attachments = [];
       for (const key in files) {
         const file = files[key];
-        const upload = await cloudinary.uploader.upload(file.filepath, {
-          folder: 'tmiweb',
-          resource_type: 'auto',
+        attachments.push({
+          filename: file.originalFilename,
+          path: file.filepath,
         });
-        fileLinks.push(upload.secure_url);
-        fs.unlinkSync(file.filepath); // Borra el archivo temporal
       }
 
-      // Configura el transporte SMTP de Mailersend
+      // Configura el transporte de correo
       const transporter = nodemailer.createTransport({
-        host: 'smtp.mailersend.net',
-        port: 587,
-        secure: false,
+        service: 'gmail',
         auth: {
-          user: 'admin@test-2p0347z8rn3lzdrn.mlsender.net',
-          pass: process.env.MAILERSEND_SMTP_PASS,
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
         },
       });
 
-      // Prepara el mensaje con los enlaces de Cloudinary
+      // Prepara el mensaje
       const mailOptions = {
-        from: '"TMI Web" <admin@test-2p0347z8rn3lzdrn.mlsender.net>',
-        to: 'molewaka22@gmail.com',
+        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
+        to: 'themodelissueclass@gmail.com',
         subject: 'Nueva postulación de modelo',
         text: `
 Nueva postulación recibida:
@@ -69,18 +58,16 @@ Edad: ${fields.edad}
 Instagram: ${fields.instagram}
 Región: ${fields.region}
 Email: ${fields.email}
-
-Archivos adjuntos:
-${fileLinks.map(link => `- ${link}`).join('\n')}
         `,
+        attachments: attachments,
       };
 
       await transporter.sendMail(mailOptions);
 
-      res.status(200).json({
-        mensaje: '✔️ Postulación enviada correctamente.',
-        archivos: fileLinks,
-      });
+      // Borra los archivos temporales
+      attachments.forEach(att => fs.unlinkSync(att.path));
+
+      res.status(200).json({ mensaje: '✔️ Postulación enviada correctamente.' });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
