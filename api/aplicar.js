@@ -1,7 +1,8 @@
-import formidable from 'formidable';
+import multer from 'multer';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
-// iptk ebko ugiw bqps
+
+const upload = multer({ dest: '/tmp/' });
 
 export const config = {
   api: {
@@ -9,32 +10,29 @@ export const config = {
   },
 };
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).send('Method Not Allowed');
-    return;
-  }
-
-  const form = new formidable.IncomingForm({ uploadDir: '/tmp', keepExtensions: true });
-
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
+export default function handler(req, res) {
+  upload.fields([
+    { name: 'foto_retrato' },
+    { name: 'foto_cuerpo_completo' },
+    { name: 'foto_mitad_cintura' },
+    { name: 'foto_lado_derecho' },
+    { name: 'foto_lado_izquierdo' }
+  ])(req, res, async function (err) {
+    if (err) return res.status(500).json({ error: err.message });
 
     try {
-      // Prepara los adjuntos
+      const datos = req.body;
+      const files = req.files;
+
       const attachments = [];
-      for (const key in files) {
-        const file = files[key];
+      for (const campo in files) {
+        const file = files[campo][0];
         attachments.push({
-          filename: file.originalFilename,
-          path: file.filepath,
+          filename: file.originalname,
+          path: file.path,
         });
       }
 
-      // Configura el transporte de correo
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -43,7 +41,6 @@ export default async function handler(req, res) {
         },
       });
 
-      // Prepara el mensaje
       const mailOptions = {
         from: `"TMI Web" <${process.env.EMAIL_USER}>`,
         to: 'themodelissueclass@gmail.com',
@@ -51,20 +48,19 @@ export default async function handler(req, res) {
         text: `
 Nueva postulación recibida:
 
-Nombre: ${fields.name}
-Género: ${fields.genero}
-Altura: ${fields.altura}
-Edad: ${fields.edad}
-Instagram: ${fields.instagram}
-Región: ${fields.region}
-Email: ${fields.email}
+Nombre: ${datos.name}
+Género: ${datos.genero}
+Altura: ${datos.altura}
+Edad: ${datos.edad}
+Instagram: ${datos.instagram}
+Región: ${datos.region}
+Email: ${datos.email}
         `,
         attachments: attachments,
       };
 
       await transporter.sendMail(mailOptions);
 
-      // Borra los archivos temporales
       attachments.forEach(att => fs.unlinkSync(att.path));
 
       res.status(200).json({ mensaje: '✔️ Postulación enviada correctamente.' });
