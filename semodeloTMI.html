@@ -59,7 +59,7 @@
     <div class="bg-white rounded-md shadow-md p-8 border border-gray-300">
       <h2 class="text-2xl font-bold mb-6 text-center tracking-wide">Formulario de Aplicación</h2>
       
-      <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data">
+      <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="https://tmi.vercel.app/api/aplicar" method="POST">
 
         <!-- 1. Género -->
         <div>
@@ -200,29 +200,6 @@
   </div>
 </section>
 
-
-<script>
-const form = document.getElementById('contactForm');
-
-form.addEventListener('submit', async function (e) {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-
-  try {
-    const res = await fetch('https://script.google.com/macros/s/AKfycbwFXRsgenrMv9t-oniKrc1Jf5ZJabf7S39jFBaYmNzRsTuwfYRaNeatnTKXQB1wHTEK5Q/exec', {
-      method: 'POST',
-      body: formData // No pongas headers, el navegador los pone automáticamente
-    });
-
-    const respuesta = await res.text();
-    alert(respuesta);
-    form.reset();
-  } catch (err) {
-    alert('❌ Error al enviar: ' + err.message);
-  }
-});
-</script>
 
 
 
