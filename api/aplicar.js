@@ -23,6 +23,14 @@ export default async function handler(req, res) {
     }
 
     try {
+      // Solo para depuración: responde antes de enviar el correo
+      res.status(200).json({
+        recibido: true,
+        fields,
+        files: Object.keys(files)
+      });
+      return;
+
       // Prepara los adjuntos para Mailersend
       const attachments = [];
       for (const key in files) {
