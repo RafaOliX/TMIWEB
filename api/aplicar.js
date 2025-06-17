@@ -1,76 +1,74 @@
-const express = require('express');
-const multer = require('multer');
-const nodemailer = require('nodemailer');
-const cors = require('cors');
-const fs = require('fs');
+import formidable from 'formidable';
+import nodemailer from 'nodemailer';
+import fs from 'fs';
 
-const app = express();
-app.use(cors());
-
-// Configura multer para archivos temporales
-const upload = multer({ dest: 'uploads/' });
-
-// Configura tu transporte de correo (ejemplo con Gmail)
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.'rafaolix59@gmail.com',      // Cambia esto
-    pass: process.env.'iptk ebko ugiw bqps',        // Usa una App Password si tienes 2FA
+export const config = {
+  api: {
+    bodyParser: false,
   },
-});
+};
 
-// Ruta para recibir el formulario
-app.post('/aplicar', upload.fields([
-  { name: 'foto_retrato' },
-  { name: 'foto_cuerpo_completo' },
-  { name: 'foto_mitad_cintura' },
-  { name: 'foto_lado_derecho' },
-  { name: 'foto_lado_izquierdo' }
-]), async (req, res) => {
-    console.log('Formulario recibido', req.body, req.files); 
-  try {
-    const datos = req.body;
-    const files = req.files;
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed');
+    return;
+  }
 
-    // Prepara los adjuntos
-    const attachments = [];
-    for (const campo in files) {
-      const file = files[campo][0];
-      attachments.push({
-        filename: file.originalname,
-        path: file.path,
-      });
+  const form = new formidable.IncomingForm({ uploadDir: '/tmp', keepExtensions: true });
+
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
     }
 
-    // Prepara el mensaje
-    const mailOptions = {
-      from: '"TMI Web" <rafaolix59@gmail.com>', // Cambia esto
-      to: 'themodelissueclass@gmail.com',      // Tu correo de destino
-      subject: 'Nueva postulación de modelo',
-      text: `
+    try {
+      // Prepara los adjuntos
+      const attachments = [];
+      for (const key in files) {
+        const file = files[key];
+        attachments.push({
+          filename: file.originalFilename,
+          path: file.filepath,
+        });
+      }
+
+      // Configura el transporte de correo
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      // Prepara el mensaje
+      const mailOptions = {
+        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
+        to: 'themodelissueclass@gmail.com',
+        subject: 'Nueva postulación de modelo',
+        text: `
 Nueva postulación recibida:
 
-Nombre: ${datos.name}
-Género: ${datos.genero}
-Altura: ${datos.altura}
-Edad: ${datos.edad}
-Instagram: ${datos.instagram}
-Región: ${datos.region}
-Email: ${datos.email}
-      `,
-      attachments: attachments,
-    };
+Nombre: ${fields.name}
+Género: ${fields.genero}
+Altura: ${fields.altura}
+Edad: ${fields.edad}
+Instagram: ${fields.instagram}
+Región: ${fields.region}
+Email: ${fields.email}
+        `,
+        attachments: attachments,
+      };
 
-    // Envía el correo
-    await transporter.sendMail(mailOptions);
+      await transporter.sendMail(mailOptions);
 
-    // Borra los archivos temporales
-    attachments.forEach(att => fs.unlinkSync(att.path));
+      // Borra los archivos temporales
+      attachments.forEach(att => fs.unlinkSync(att.path));
 
-    res.json({ mensaje: '✔️ Postulación enviada correctamente.' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.listen(3000, () => console.log('Servidor en http://localhost:3000'));
+      res.status(200).json({ mensaje: '✔️ Postulación enviada correctamente.' });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+}
