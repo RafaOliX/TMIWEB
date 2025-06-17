@@ -1,6 +1,6 @@
 import formidable from 'formidable';
 import fs from 'fs';
-import { MailerSend, EmailParams, Recipient, Attachment } from 'mailersend';
+import nodemailer from 'nodemailer';
 
 export const config = {
   api: {
@@ -23,36 +23,33 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Solo para depuración: responde antes de enviar el correo
-      res.status(200).json({
-        recibido: true,
-        fields,
-        files: Object.keys(files)
-      });
-      return;
-
-      // Prepara los adjuntos para Mailersend
+      // Prepara los adjuntos
       const attachments = [];
       for (const key in files) {
         const file = files[key];
-        const content = fs.readFileSync(file.filepath, { encoding: 'base64' });
-        attachments.push(
-          new Attachment(file.originalFilename, content)
-        );
+        attachments.push({
+          filename: file.originalFilename,
+          path: file.filepath,
+        });
       }
 
-      const mailersend = new MailerSend({
-        apiKey: process.env.MAILERSEND_API_KEY,
+      // Configura el transporte SMTP de Mailersend
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.mailersend.net',
+        port: 587,
+        secure: false,
+        auth: {
+          user: 'admin@test-2p0347z8rn3lzdrn.mlsender.net',
+          pass: process.env.MAILERSEND_SMTP_PASS, // Pon tu contraseña SMTP en Vercel
+        },
       });
 
-      const recipients = [new Recipient('molewaka22@gmail.com', 'TMI')];
-
-      const emailParams = new EmailParams()
-        .setFrom(process.env.EMAIL_USER) // Debe ser un remitente verificado en Mailersend
-        .setFromName('TMI Web')
-        .setRecipients(recipients)
-        .setSubject('Nueva postulación de modelo')
-        .setText(`
+      // Prepara el mensaje
+      const mailOptions = {
+        from: '"TMI Web" <admin@test-2p0347z8rn3lzdrn.mlsender.net>',
+        to: 'molewaka22@gmail.com',
+        subject: 'Nueva postulación de modelo',
+        text: `
 Nueva postulación recibida:
 
 Nombre: ${fields.name}
@@ -62,16 +59,14 @@ Edad: ${fields.edad}
 Instagram: ${fields.instagram}
 Región: ${fields.region}
 Email: ${fields.email}
-        `)
-        .setAttachments(attachments);
+        `,
+        attachments: attachments,
+      };
 
-      await mailersend.send(emailParams);
+      await transporter.sendMail(mailOptions);
 
       // Borra los archivos temporales
-      attachments.forEach((att, idx) => {
-        const file = files[Object.keys(files)[idx]];
-        fs.unlinkSync(file.filepath);
-      });
+      attachments.forEach(att => fs.unlinkSync(att.path));
 
       res.status(200).json({
         mensaje: '✔️ Postulación enviada correctamente.'
