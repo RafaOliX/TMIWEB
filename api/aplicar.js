@@ -1,6 +1,6 @@
 import formidable from 'formidable';
-import nodemailer from 'nodemailer';
 import fs from 'fs';
+import { MailerSend, EmailParams, Recipient, Attachment } from 'mailersend';
 
 export const config = {
   api: {
@@ -23,33 +23,28 @@ export default async function handler(req, res) {
     }
 
     try {
-      // Prepara los adjuntos
+      // Prepara los adjuntos para Mailersend
       const attachments = [];
       for (const key in files) {
         const file = files[key];
-        attachments.push({
-          filename: file.originalFilename,
-          path: file.filepath,
-        });
+        const content = fs.readFileSync(file.filepath, { encoding: 'base64' });
+        attachments.push(
+          new Attachment(file.originalFilename, content)
+        );
       }
 
-      // Configura el transporte de correo para Mailersend
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.mailersend.net',
-        port: 587,
-        secure: false,
-        auth: {
-          user: 'apikey', // Literalmente 'apikey'
-          pass: process.env.MAILERSEND_API_KEY,
-        },
+      const mailersend = new MailerSend({
+        apiKey: process.env.MAILERSEND_API_KEY,
       });
 
-      // Prepara el mensaje
-      const mailOptions = {
-        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
-        to: 'themodelissueclass@gmail.com',
-        subject: 'Nueva postulación de modelo',
-        text: `
+      const recipients = [new Recipient('themodelissueclass@gmail.com', 'TMI')];
+
+      const emailParams = new EmailParams()
+        .setFrom(process.env.EMAIL_USER) // Debe ser un remitente verificado en Mailersend
+        .setFromName('TMI Web')
+        .setRecipients(recipients)
+        .setSubject('Nueva postulación de modelo')
+        .setText(`
 Nueva postulación recibida:
 
 Nombre: ${fields.name}
@@ -59,16 +54,18 @@ Edad: ${fields.edad}
 Instagram: ${fields.instagram}
 Región: ${fields.region}
 Email: ${fields.email}
-        `,
-        attachments: attachments,
-      };
+        `)
+        .setAttachments(attachments);
 
-      const info = await transporter.sendMail(mailOptions);
+      await mailersend.send(emailParams);
 
       // Borra los archivos temporales
-      attachments.forEach(att => fs.unlinkSync(att.path));
+      attachments.forEach((att, idx) => {
+        const file = files[Object.keys(files)[idx]];
+        fs.unlinkSync(file.filepath);
+      });
 
-      res.status(200).json({ 
+      res.status(200).json({
         mensaje: '✔️ Postulación enviada correctamente.'
       });
     } catch (err) {
