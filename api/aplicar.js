@@ -33,22 +33,18 @@ export default async function handler(req, res) {
         });
       }
 
-      // Crea una cuenta de prueba en Ethereal
-      const testAccount = await nodemailer.createTestAccount();
-
-      // Configura el transporte de correo para Ethereal
+      // Configura el transporte de correo para Gmail (o SMTP real)
       const transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        service: 'gmail',
         auth: {
-            user: 'johan63@ethereal.email',
-            pass: 'GeEP6zaAmN9KzztBD5'
-        }
-    });
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
 
       // Prepara el mensaje
       const mailOptions = {
-        from: `"TMI Web" <${testAccount.user}>`,
+        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
         to: 'themodelissueclass@gmail.com',
         subject: 'Nueva postulación de modelo',
         text: `
@@ -71,8 +67,7 @@ Email: ${fields.email}
       attachments.forEach(att => fs.unlinkSync(att.path));
 
       res.status(200).json({ 
-        mensaje: '✔️ Postulación enviada correctamente.',
-        previewUrl: nodemailer.getTestMessageUrl(info) // URL para ver el correo en Ethereal
+        mensaje: '✔️ Postulación enviada correctamente.'
       });
     } catch (err) {
       res.status(500).json({ error: err.message });
