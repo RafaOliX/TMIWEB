@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const form = new formidable.IncomingForm({ uploadDir: '/tmp', keepExtensions: true });
+  const form = new formidable.IncomingForm({ uploadDir: './tmp', keepExtensions: true });
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
@@ -33,18 +33,22 @@ export default async function handler(req, res) {
         });
       }
 
-      // Configura el transporte de correo
+      // Crea una cuenta de prueba en Ethereal
+      const testAccount = await nodemailer.createTestAccount();
+
+      // Configura el transporte de correo para Ethereal
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.ethereal.email',
+        port: 587,
         auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-      });
+            user: 'johan63@ethereal.email',
+            pass: 'GeEP6zaAmN9KzztBD5'
+        }
+    });
 
       // Prepara el mensaje
       const mailOptions = {
-        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
+        from: `"TMI Web" <${testAccount.user}>`,
         to: 'themodelissueclass@gmail.com',
         subject: 'Nueva postulación de modelo',
         text: `
@@ -61,12 +65,15 @@ Email: ${fields.email}
         attachments: attachments,
       };
 
-      await transporter.sendMail(mailOptions);
+      const info = await transporter.sendMail(mailOptions);
 
       // Borra los archivos temporales
       attachments.forEach(att => fs.unlinkSync(att.path));
 
-      res.status(200).json({ mensaje: '✔️ Postulación enviada correctamente.' });
+      res.status(200).json({ 
+        mensaje: '✔️ Postulación enviada correctamente.',
+        previewUrl: nodemailer.getTestMessageUrl(info) // URL para ver el correo en Ethereal
+      });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
