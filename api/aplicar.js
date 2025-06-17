@@ -37,7 +37,7 @@ export default async function handler(req, res) {
         apiKey: process.env.MAILERSEND_API_KEY,
       });
 
-      const recipients = [new Recipient('rafaolix59@gmail.com', 'TMI')];
+      const recipients = [new Recipient('molewaka22@gmail.com', 'TMI')];
 
       const emailParams = new EmailParams()
         .setFrom(process.env.EMAIL_USER) // Debe ser un remitente verificado en Mailersend
