@@ -42,7 +42,7 @@ export default function handler(req, res) {
       });
 
       const mailOptions = {
-        from: `"TMI Web" <${process.env.EMAIL_USER}>`,
+        from: `"TMI Web😀" <${process.env.EMAIL_USER}>`,
         to: 'molewaka22@gmail.com', // Cambia esto al correo de destino
         subject: 'Nueva postulación de modelo',
         text: `
