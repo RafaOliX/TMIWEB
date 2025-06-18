@@ -55,6 +55,7 @@ Edad: ${datos.edad}
 Instagram: ${datos.instagram}
 Región: ${datos.region}
 Email: ${datos.email}
+Enlaces: ${datos.enlace}
         `,
         attachments: attachments,
       };
