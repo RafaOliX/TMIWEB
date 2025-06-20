@@ -35,13 +35,17 @@
 </div>
 
 
-
-
-<section class="bg-[#f5f5f5] py-20 px-6 text-gray-800">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+<section class=" overflow-hidden min-h-[88dvh] flex  justify-center">
+    <!-- Video de fondo -->
+    <video class="absolute top-0 left-0 w-full h-full object-cover z-0" autoplay loop muted playsinline src="src/assets/inicio/inicio-video.mp4"></video>
+    <!-- Overlay opcional para oscurecer el video -->
+    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
+    
+    
+  <div class=" max-w-6xl  grid md:grid-cols-2 gap-10  z-20 items-baseline ">
 
     <!-- Columna de advertencia -->
-    <div class="bg-white rounded-md shadow-md p-8 border border-gray-300 text-sm leading-relaxed">
+    <div class="bg-[#77777705] rounded-md shadow-md p-8 border border-gray-300 text-slate-50 text-sm leading-relaxed">
       <h2 class="text-2xl font-bold mb-4">Contáctanos</h2>
       <p class="mb-4">Por favor llenar los datos que se le piden</p>
       <p class="mb-4">Foto polas correspondiente en ropa negra con fondo de pared blanco, queremos ver tus perfiles!</p>
@@ -53,29 +57,35 @@
     </div>
  
  
- 
+    
  
     <!-- Columna derecha: Formulario -->
-    <div class="bg-white rounded-md shadow-md p-8 border border-gray-300">
-      <h2 class="text-2xl font-bold mb-6 text-center tracking-wide">Formulario de Aplicación</h2>
+    <div class="bg-[#77777705] text-white rounded-md shadow-md p-8 m-4 border border-gray-300">
+      <h2 class="text-2xl font-bold mb-0 text-center tracking-wide">Formulario de Aplicación</h2>
       
       <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST">
 
         <!-- 1. Género -->
         <div>
-          <label class="block font-medium mb-1">Género</label>
-          <div class="flex gap-4">
-            <label><input type="radio" name="genero" value="Mujer" required> Mujer</label>
-            <label><input type="radio" name="genero" value="Hombre"> Hombre</label>
-            <label><input type="radio" name="genero" value="No Binario"> No binario</label>
+          <label class="block font-medium mb-1">GÉNERO</label>
+          <div class="flex gap-1">
+            <label><input type="radio" name="genero" value="Mujer" required> MUJER</label>
+            <label><input type="radio" name="genero" value="Hombre"> HOMBRE</label>
+            <label><input type="radio" name="genero" value="No Binario"> NO BINARIO</label>
           </div>
         </div>
 
         <!-- 2. Nombre -->
-        <div>
-          <label class="block font-medium mb-1">Nombre y Apellido</label>
-          <input type="text" name="name" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block font-medium mb-1">Nombre y Apellido</label>
+        <input type="text" name="name" placeholder="Cómo te llamas?" class="input-field border border-gray-400 p-1 rounded-md focus:ring-2 focus:border-slate-100 focus:border-slate-100">
+      </div>
+      <div>
+        <label class="block font-medium mb-1 ">Edad</label>
+        <input type="number" name="edad" placeholder="Tu edad actual?" required class="input-field border border-gray-400 p-1 rounded-md focus:ring-2 focus:border-slate-100 focus:border-slate-100">
+      </div>
+    </div>
 
         <!-- 3. Altura -->
         <div>
@@ -113,6 +123,15 @@
           <input type="enlace" name="enlace"  class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
         </div>
 
+
+
+
+
+
+
+
+
+        
         <!-- 9. Fotos Polas -->
         <div class="space-y-6">
   <label class="block font-semibold text-base mb-4">Fotos Polas (requeridas)</label>
@@ -125,7 +144,7 @@
         <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
           <img id="preview_foto_retrato" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Rostro frontal"
             class="w-full h-full object-cover" />
-          <input type="file" name="foto_retrato" id="foto_retrato" accept="image/*" required
+            <input type="file" name="foto_retrato" id="foto_retrato" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_retrato')" />
         </div>
         <div class="text-sm mt-2">📸 Rostro de frente</div>
@@ -165,7 +184,7 @@
           <img id="preview_foto_derecho" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil derecho"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
-            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
+          class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
         </div>
         <div class="text-sm mt-2">📸 Perfil derecho</div>
       </label>
@@ -187,17 +206,12 @@
   </div>
 </div>
 
-  </div>
-</div>
-
-</div>
 
 
 
 
 
-
-        <button type="submit" class="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-md font-semibold tracking-wide transition">
+        <button type="submit" class="w-full bg-white hover:bg-gray-800 text-black py-3 rounded-md font-semibold tracking-wide transition">
           Enviar Aplicación
         </button>
       </form>
@@ -207,6 +221,13 @@
 </section>
 
 
+
+<!-- Estilo común sugerido -->
+<style>
+  .input-field {
+    @apply w-full border border-gray-400 bg-white text-black p-3 rounded-md focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition;
+  }
+</style>
 
 
 <script>
