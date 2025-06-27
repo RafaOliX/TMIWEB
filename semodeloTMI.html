@@ -75,52 +75,47 @@
           </div>
         </div>
 
-        <!-- 2. Nombre -->
+        <!-- Nombre y edad-->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <label class="block font-medium mb-1">Nombre y Apellido</label>
-        <input type="text" name="name" placeholder="Cómo te llamas?" class="input-field border border-gray-400 p-1 rounded-md focus:ring-2 focus:border-slate-100 focus:border-slate-100">
-      </div>
-      <div>
-        <label class="block font-medium mb-1 ">Edad</label>
-        <input type="number" name="edad" placeholder="Tu edad actual?" required class="input-field border border-gray-400 p-1 rounded-md focus:ring-2 focus:border-slate-100 focus:border-slate-100">
-      </div>
-    </div>
-
-        <!-- 3. Altura -->
-        <div>
-          <label class="block font-medium mb-1">Altura (cm)</label>
-          <input type="number" name="altura" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+          <div>
+            <label class="block font-medium mb-1">Nombre y Apellido</label>
+            <input type="text" name="name" placeholder="¿Cómo te llamas?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+          </div>
+          <div>
+            <label class="block font-medium mb-1 ">Edad</label>
+            <input type="number" name="edad" placeholder="¿Tu edad actual?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+          </div>
         </div>
 
-        <!-- 4. Edad -->
-        <div>
-          <label class="block font-medium mb-1">Edad</label>
-          <input type="number" name="edad" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
-        </div>
+        <!-- Altura y instagram-->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block font-medium mb-1">Altura (cm)</label>
+            <input type="number" name="altura" placeholder="¿Cuánto mides?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+          </div>
 
-        <!-- 5. Instagram -->
-        <div>
-          <label class="block font-medium mb-1">Instagram</label>
-          <input type="text" name="instagram" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+          <div>
+            <label class="block font-medium mb-1">Instagram</label>
+            <input type="text" name="instagram" placeholder="¿Cuál es tu @?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+          </div>
         </div>
 
         <!-- 6. País / Región -->
         <div>
           <label class="block font-medium mb-1">País o Región</label>
-          <input type="text" name="region" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+          <input type="text" name="region" placeholder="¿Desde qué país o región aplicas?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
         </div>
 
         <!-- 7. Correo -->
         <div>
           <label class="block font-medium mb-1">Correo Electrónico</label>
-          <input type="email" name="email" required class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+          <input type="email" name="email" placeholder="¿Cuál es tu correo de contacto?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
         </div>
 
         <!-- 8. Correo -->
         <div>
           <label class="block font-medium mb-1">Portafolio (Enlaces de Utilidad)</label>
-          <input type="enlace" name="enlace"  class="w-full border border-gray-400 p-3 rounded-md focus:ring-2 focus:ring-blue-500">
+          <input type="enlace" name="enlace" placeholder="¿Tienes un portafolio o enlace útil para ver tu trabajo?"  class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
         </div>
 
 
@@ -139,67 +134,83 @@
   <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
 
     <!-- Rostro -->
-    <div>
-      <label for="foto_retrato" class="cursor-pointer group">
-        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
-          <img id="preview_foto_retrato" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Rostro frontal"
-            class="w-full h-full object-cover" />
-            <input type="file" name="foto_retrato" id="foto_retrato" accept="image/*" required
-            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_retrato')" />
-        </div>
-        <div class="text-sm mt-2">📸 Rostro de frente</div>
+    <div class="w-32 h-44">
+    <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
+      <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
+        <img id="preview_foto_retrato"
+              src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+              alt="Rostro frontal"
+              class="w-full h-full object-cover" />
+        <input type="file"
+                name="foto_retrato"
+                id="foto_retrato"
+                accept="image/*"
+                required
+                class="absolute inset-0 opacity-0 cursor-pointer"
+                onchange="preview(this, 'preview_foto_retrato')" />
+      </div>
+       <div class=" text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1 ">Rostro de frente</div>
       </label>
     </div>
 
+
     <!-- Cuerpo completo -->
     <div>
-      <label for="foto_cuerpo_completo" class="cursor-pointer group">
-        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+      <label for="foto_cuerpo_completo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
+        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
           <img id="preview_foto_cuerpo" src="https://images.pexels.com/photos/7679723/pexels-photo-7679723.jpeg" alt="Cuerpo completo"
             class="w-full h-full object-cover" />
-          <input type="file" name="foto_cuerpo_completo" id="foto_cuerpo_completo" accept="image/*" required
-            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_cuerpo')" />
+          <input type="file" 
+                name="foto_cuerpo_completo" 
+                id="foto_cuerpo_completo" 
+                accept="image/*" required
+            class="absolute inset-0 opacity-0 cursor-pointer" 
+            onchange="preview(this, 'preview_foto_cuerpo')" />
         </div>
-        <div class="text-sm mt-2">📸 Cuerpo completo</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Cuerpo completo</div>
       </label>
     </div>
 
     <!-- Mitad cintura -->
     <div>
-      <label for="foto_mitad_cintura" class="cursor-pointer group">
-        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+      <label for="foto_mitad_cintura" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
+        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
           <img id="preview_foto_cintura" src="https://images.pexels.com/photos/1441150/pexels-photo-1441150.jpeg" alt="Mitad de cintura"
             class="w-full h-full object-cover" />
-          <input type="file" name="foto_mitad_cintura" id="foto_mitad_cintura" accept="image/*" required
-            class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_cintura')" />
+          <input type="file" 
+          name="foto_mitad_cintura" 
+          id="foto_mitad_cintura" 
+          accept="image/*" required
+          class="absolute inset-0 opacity-0 cursor-pointer" 
+          onchange="preview(this, 'preview_foto_cintura')" />
         </div>
-        <div class="text-sm mt-2">📸 Mitad de cintura</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Mitad de cintura</div>
       </label>
     </div>
 
     <!-- Perfil derecho -->
     <div>
-      <label for="foto_lado_derecho" class="cursor-pointer group">
-        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+      <label for="foto_lado_derecho" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
+        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
           <img id="preview_foto_derecho" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil derecho"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
         </div>
-        <div class="text-sm mt-2">📸 Perfil derecho</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Perfil derecho</div>
       </label>
     </div>
 
     <!-- Perfil izquierdo -->
     <div>
-      <label for="foto_lado_izquierdo" class="cursor-pointer group">
-        <div class="relative w-28 h-36 rounded-md overflow-hidden border border-gray-300 shadow hover:scale-105 transition duration-200">
+      <label for="foto_lado_izquierdo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
+        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
           <img id="preview_foto_izquierdo" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil izquierdo"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_izquierdo')" />
         </div>
-        <div class="text-sm mt-2">📸 Perfil izquierdo</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Perfil izquierdo</div>
       </label>
     </div>
 
