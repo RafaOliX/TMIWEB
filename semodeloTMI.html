@@ -18,10 +18,9 @@
     <div class="logo">THE MODEL ISSUE</div>
     <ul class="menu">
         <li><a href="index.html">INICIO</a></li>
-        <li><a href="agenciaTMI.html">TMI AGENICA</a></li>
+        <li><a href="agenciaTMI.html">TMI AGENCIA</a></li>
         <li><a href="modelos.html">MODELOS</a></li>
-        <li><a href="#">TMI ACADEMIA</a></li>
-        <li><a href="semodeloTMI.html">APLICA PARA SER MODELO TMI AGENCIA</a></li>
+        <li><a href="academiaTMI.html">TMI ACADEMIA</a></li>        <li><a href="semodeloTMI.html">APLICA PARA SER MODELO TMI AGENCIA</a></li>
         <li><a href="contacto.html">CONTACTO</a></li>
     </ul>
 </nav>
@@ -45,8 +44,8 @@
   <div class=" max-w-6xl  grid md:grid-cols-2 gap-10  z-20 items-baseline ">
 
     <!-- Columna de advertencia -->
-    <div class="bg-[#77777705] rounded-md shadow-md p-8 border border-gray-300 text-slate-50 text-sm leading-relaxed">
-      <h2 class="text-2xl font-bold mb-4">Contáctanos</h2>
+    <div class="bg-[#1d1d1d56] rounded-md shadow-md p-8 border border-gray-300 text-slate-50 text-sm leading-relaxed">
+      <h2 class="text-2xl font-bold mb-4">CONTÁCTANOS</h2>
       <p class="mb-4">Por favor llenar los datos que se le piden</p>
       <p class="mb-4">Foto polas correspondiente en ropa negra con fondo de pared blanco, queremos ver tus perfiles!</p>
       <p class="mb-4">Al ser seleccionado por la agencia se le informará a través de nuestro correo oficial o numero telefónico:</p>
@@ -60,73 +59,105 @@
     
  
     <!-- Columna derecha: Formulario -->
-    <div class="bg-[#77777705] text-white rounded-md shadow-md p-8 m-4 border border-gray-300">
-      <h2 class="text-2xl font-bold mb-0 text-center tracking-wide">Formulario de Aplicación</h2>
+    <div class="bg-[#1d1d1d56] text-white rounded-md shadow-md p-8 m-4 border border-gray-300">
+      <h2 class="text-2xl font-bold mb-0 text-center tracking-wide"></h2>
       
       <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST">
 
-        <!-- 1. Género -->
-        <div>
-          <label class="block font-medium mb-1">GÉNERO</label>
-          <div class="flex gap-1">
-            <label><input type="radio" name="genero" value="Mujer" required> MUJER</label>
-            <label><input type="radio" name="genero" value="Hombre"> HOMBRE</label>
-            <label><input type="radio" name="genero" value="No Binario"> NO BINARIO</label>
-          </div>
-        </div>
+  <!-- 1. Género -->
+  <div>
+    <label class="block font-medium mb-1">GÉNERO</label>
+    <div class="flex gap-1">
+      <label><input type="radio" name="genero" value="Mujer" required> MUJER</label>
+      <label><input type="radio" name="genero" value="Hombre"> HOMBRE</label>
+      <label><input type="radio" name="genero" value="No Binario"> NO BINARIO</label>
+    </div>
+  </div>
 
-        <!-- Nombre y edad-->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block font-medium mb-1">Nombre y Apellido</label>
-            <input type="text" name="name" placeholder="¿Cómo te llamas?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-          </div>
-          <div>
-            <label class="block font-medium mb-1 ">Edad</label>
-            <input type="number" name="edad" placeholder="¿Tu edad actual?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-          </div>
-        </div>
+  <!-- Nombre y edad -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block font-medium mb-1">Nombre y Apellido</label>
+      <input type="text" name="name" placeholder="¿Cómo te llamas?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100" required>
+    </div>
+    <div>
+      <label class="block font-medium mb-1">Edad</label>
+      <input type="number" name="edad" placeholder="¿Tu edad actual?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+    </div>
+  </div>
 
-        <!-- Altura y instagram-->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block font-medium mb-1">Altura (cm)</label>
-            <input type="number" name="altura" placeholder="¿Cuánto mides?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-          </div>
+  
+  <!-- ¿Es estudiante? -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block font-medium mb-1">¿Eres estudiante?</label>
+      <select name="estudiante" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
 
-          <div>
-            <label class="block font-medium mb-1">Instagram</label>
-            <input type="text" name="instagram" placeholder="¿Cuál es tu @?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-          </div>
-        </div>
+    <!-- ¿Tiene pasaporte vigente? -->
+    <div>
+      <label class="block font-medium mb-1">¿Tienes pasaporte vigente?</label>
+      <select name="pasaporte" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+        <option value="" disabled selected>Selecciona una opción</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  </div>
 
-        <!-- 6. País / Región -->
-        <div>
-          <label class="block font-medium mb-1">País o Región</label>
-          <input type="text" name="region" placeholder="¿Desde qué país o región aplicas?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-        </div>
+  <!-- Número de contacto del modelo -->
+  <div>
+    <label class="block font-medium mb-1">Número de contacto del modelo</label>
+    <input type="tel" name="telefono_modelo" placeholder="Ej: +58 0412..." required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+  </div>
 
-        <!-- 7. Correo -->
-        <div>
-          <label class="block font-medium mb-1">Correo Electrónico</label>
-          <input type="email" name="email" placeholder="¿Cuál es tu correo de contacto?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-        </div>
+  <!-- Si eres menor de edad, contacto de representante -->
+  <div>
+    <label class="block font-medium mb-1">Si eres menor de edad, contacto de representante</label>
+    <input type="tel" name="telefono_representante" placeholder="Teléfono del representante (si aplica)" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+  </div>
 
-        <!-- 8. Correo -->
-        <div>
-          <label class="block font-medium mb-1">Portafolio (Enlaces de Utilidad)</label>
-          <input type="enlace" name="enlace" placeholder="¿Tienes un portafolio o enlace útil para ver tu trabajo?"  class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
-        </div>
+  <!-- Altura y instagram-->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block font-medium mb-1">Altura (cm)</label>
+      <input type="number" name="altura" placeholder="¿Cuánto mides?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+    </div>
 
+    <div>
+      <label class="block font-medium mb-1">Instagram</label>
+      <input type="text" name="instagram" placeholder="¿Cuál es tu @?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+    </div>
+  </div>
 
+  <!-- 6. País / Región -->
+  <div>
+    <label class="block font-medium mb-1">País o Región</label>
+    <input type="text" name="region" placeholder="¿Desde qué país o región aplicas?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+  </div>
 
+  <!-- Dirección exacta de vivienda -->
+  <div>
+    <label class="block font-medium mb-1">Dirección exacta de vivienda</label>
+    <input type="text" name="direccion" placeholder="¿Dónde vives?" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
+  </div>
+  
+  <!-- 7. Correo -->
+  <div>
+    <label class="block font-medium mb-1">Correo Electrónico</label>
+    <input type="email" name="email" placeholder="¿Cuál es tu correo de contacto?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+  </div>
 
+  <!-- 8. Correo -->
+  <div>
+    <label class="block font-medium mb-1">Portafolio (Enlaces de Utilidad)</label>
+    <input type="enlace" name="enlace" placeholder="¿Tienes un portafolio o enlace útil para ver tu trabajo?"  class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+  </div>
 
-
-
-
-
-        
         <!-- 9. Fotos Polas -->
         <div class="space-y-6">
   <label class="block font-semibold text-base mb-4">Fotos Polas (requeridas)</label>
@@ -138,7 +169,7 @@
     <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
       <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
         <img id="preview_foto_retrato"
-              src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg"
+              src="src/assets/bancoFotos/postula/retrato.jpg"
               alt="Rostro frontal"
               class="w-full h-full object-cover" />
         <input type="file"
@@ -158,7 +189,7 @@
     <div>
       <label for="foto_cuerpo_completo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
         <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_cuerpo" src="https://images.pexels.com/photos/7679723/pexels-photo-7679723.jpeg" alt="Cuerpo completo"
+          <img id="preview_foto_cuerpo" src="src/assets/bancoFotos/postula/completo.jpg" alt="Cuerpo completo"
             class="w-full h-full object-cover" />
           <input type="file" 
                 name="foto_cuerpo_completo" 
@@ -175,7 +206,7 @@
     <div>
       <label for="foto_mitad_cintura" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
         <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_cintura" src="https://images.pexels.com/photos/1441150/pexels-photo-1441150.jpeg" alt="Mitad de cintura"
+          <img id="preview_foto_cintura" src="src/assets/bancoFotos/postula/mitad.jpg" alt="Mitad de cintura"
             class="w-full h-full object-cover" />
           <input type="file" 
           name="foto_mitad_cintura" 
@@ -192,7 +223,7 @@
     <div>
       <label for="foto_lado_derecho" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
         <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_derecho" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil derecho"
+          <img id="preview_foto_derecho" src="src/assets/bancoFotos/postula/pderecho.jpg" alt="Perfil derecho"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
@@ -205,7 +236,7 @@
     <div>
       <label for="foto_lado_izquierdo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
         <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_izquierdo" src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Perfil izquierdo"
+          <img id="preview_foto_izquierdo" src="src/assets/bancoFotos/postula/pizquierdo.jpg" alt="Perfil izquierdo"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_izquierdo')" />
