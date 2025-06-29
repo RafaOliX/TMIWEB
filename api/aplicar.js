@@ -50,10 +50,15 @@ Nueva postulación recibida:
 
 Nombre: ${datos.name}
 Género: ${datos.genero}
-Altura: ${datos.altura}
 Edad: ${datos.edad}
+¿Es estudiante?: ${datos.estudiante}
+¿Tiene pasaporte vigente?: ${datos.pasaporte}
+Teléfono modelo: ${datos.telefono_modelo}
+Teléfono representante: ${datos.telefono_representante}
+Altura: ${datos.altura}
 Instagram: ${datos.instagram}
 Región: ${datos.region}
+Dirección: ${datos.direccion}
 Email: ${datos.email}
 Enlaces: ${datos.enlace}
         `,

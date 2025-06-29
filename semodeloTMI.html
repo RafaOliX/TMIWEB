@@ -34,17 +34,15 @@
 </div>
 
 
-<section class=" overflow-hidden min-h-[88dvh] flex  justify-center">
-    <!-- Video de fondo -->
-    <video class="absolute top-0 left-0 w-full h-full object-cover z-0" autoplay loop muted playsinline src="src/assets/inicio/inicio-video.mp4"></video>
-    <!-- Overlay opcional para oscurecer el video -->
-    <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
-    
-    
-  <div class=" max-w-6xl  grid md:grid-cols-2 gap-10  z-20 items-baseline ">
+<section class="overflow-hidden min-h-[88dvh] flex justify-center mx-2 md:mx-48">
+  <!-- Video de fondo -->
+  <video class="absolute top-0 left-0 w-full h-full object-cover z-0" autoplay loop muted playsinline src="src/assets/inicio/inicio-video.mp4"></video>
+  <!-- Overlay opcional para oscurecer el video -->
+  <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
 
+  <div class="w-full grid grid-cols-1  md:grid-cols-10 gap-0 md:gap-0 z-20 items-start">
     <!-- Columna de advertencia -->
-    <div class="bg-[#1d1d1d56] rounded-md shadow-md p-8 border border-gray-300 text-slate-50 text-sm leading-relaxed">
+    <div class="bg-[#1d1d1d56] rounded-md shadow-md p-4 md:p-8 m-2 md:m-4 border border-gray-300 text-slate-50 text-sm leading-relaxed md:col-span-4">
       <h2 class="text-2xl font-bold mb-4">CONTÁCTANOS</h2>
       <p class="mb-4">Por favor llenar los datos que se le piden</p>
       <p class="mb-4">Foto polas correspondiente en ropa negra con fondo de pared blanco, queremos ver tus perfiles!</p>
@@ -54,12 +52,9 @@
         <li>📞 <strong>+58 04128703811</strong></li>
       </ul>
     </div>
- 
- 
-    
- 
+
     <!-- Columna derecha: Formulario -->
-    <div class="bg-[#1d1d1d56] text-white rounded-md shadow-md p-8 m-4 border border-gray-300">
+    <div class="bg-[#1d1d1d56] text-white rounded-md shadow-md p-4 md:p-8 m-2 md:m-4 border border-gray-300 md:col-span-6">
       <h2 class="text-2xl font-bold mb-0 text-center tracking-wide"></h2>
       
       <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST">
@@ -160,14 +155,15 @@
 
         <!-- 9. Fotos Polas -->
         <div class="space-y-6">
-  <label class="block font-semibold text-base mb-4">Fotos Polas (requeridas)</label>
+  <label class="block font-semibold text-base mb-4 text-center">FOTOS POLAS</label>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-8 text-center">
 
     <!-- Rostro -->
-    <div class="w-32 h-44">
-    <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
-      <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
+    <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
+      <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
         <img id="preview_foto_retrato"
               src="src/assets/bancoFotos/postula/retrato.jpg"
               alt="Rostro frontal"
@@ -182,14 +178,13 @@
       </div>
        <div class=" text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1 ">Rostro de frente</div>
       </label>
-    </div>
-
-
-    <!-- Cuerpo completo -->
+      
+      
+      <!-- Cuerpo completo -->
     <div>
-      <label for="foto_cuerpo_completo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
-        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_cuerpo" src="src/assets/bancoFotos/postula/completo.jpg" alt="Cuerpo completo"
+     <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
+      <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
+         <img id="preview_foto_cuerpo" src="src/assets/bancoFotos/postula/completo.jpg" alt="Cuerpo completo"
             class="w-full h-full object-cover" />
           <input type="file" 
                 name="foto_cuerpo_completo" 
@@ -204,9 +199,9 @@
 
     <!-- Mitad cintura -->
     <div>
-      <label for="foto_mitad_cintura" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
-        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_cintura" src="src/assets/bancoFotos/postula/mitad.jpg" alt="Mitad de cintura"
+      <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
+      <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
+        <img id="preview_foto_cintura" src="src/assets/bancoFotos/postula/mitad.jpg" alt="Mitad de cintura"
             class="w-full h-full object-cover" />
           <input type="file" 
           name="foto_mitad_cintura" 
@@ -215,37 +210,42 @@
           class="absolute inset-0 opacity-0 cursor-pointer" 
           onchange="preview(this, 'preview_foto_cintura')" />
         </div>
-        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Mitad de cintura</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Mitad de cintura</div>
       </label>
     </div>
 
+  </div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8 text-center  md:px-28 py-4 px-2">
+
     <!-- Perfil derecho -->
     <div>
-      <label for="foto_lado_derecho" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
-        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_derecho" src="src/assets/bancoFotos/postula/pderecho.jpg" alt="Perfil derecho"
+      <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
+      <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
+        <img id="preview_foto_derecho" src="src/assets/bancoFotos/postula/pderecho.jpg" alt="Perfil derecho"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_derecho')" />
         </div>
-        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Perfil derecho</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Perfil derecho</div>
       </label>
     </div>
 
     <!-- Perfil izquierdo -->
     <div>
-      <label for="foto_lado_izquierdo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out">
-        <div class="relative w-full h-full  overflow-hidden  shadow-md hover:shadow-lg  bg-white">
-          <img id="preview_foto_izquierdo" src="src/assets/bancoFotos/postula/pizquierdo.jpg" alt="Perfil izquierdo"
+      <label for="foto_retrato" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
+      <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
+        <img id="preview_foto_izquierdo" src="src/assets/bancoFotos/postula/pizquierdo.jpg" alt="Perfil izquierdo"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_izquierdo')" />
         </div>
-        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">📸 Perfil izquierdo</div>
+        <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Perfil izquierdo</div>
       </label>
     </div>
-
-  </div>
+</div>
+    
 </div>
 
 
@@ -253,7 +253,8 @@
 
 
 
-        <button type="submit" class="w-full bg-white hover:bg-gray-800 text-black py-3 rounded-md font-semibold tracking-wide transition">
+
+        <button type="submit" class="w-full bg-zinc-300 hover:bg-slate-500 text-black py-3 my-3 cursor-pointer rounded-md font-semibold tracking-wide transition">
           Enviar Aplicación
         </button>
       </form>
@@ -282,7 +283,49 @@
 </script>
 
 
+<script>
+const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2MB
 
+function preview(input, targetId) {
+  const file = input.files[0];
+  const warningId = targetId + '_warning';
+  let warning = document.getElementById(warningId);
+
+  // Elimina advertencia previa si existe
+  if (warning) warning.remove();
+
+  if (file) {
+    document.getElementById(targetId).src = URL.createObjectURL(file);
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      // Crea advertencia visual sobre la imagen
+      const parent = input.closest('.relative');
+      const msg = document.createElement('div');
+      msg.id = warningId;
+      msg.className = "absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-red-400 font-bold text-center text-xs px-2 z-20";
+      msg.innerText = "La imagen supera el máximo permitido (2MB)";
+      parent.appendChild(msg);
+    }
+  }
+}
+
+// Validación antes de enviar el formulario
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  let valid = true;
+  const inputs = this.querySelectorAll('input[type="file"]');
+  inputs.forEach(input => {
+    const file = input.files[0];
+    if (file && file.size > MAX_IMAGE_SIZE) {
+      valid = false;
+      // Opcional: enfoca el input o muestra un alert
+    }
+  });
+  if (!valid) {
+    alert('Una o más imágenes superan el tamaño máximo permitido (2MB). Corrige antes de enviar.');
+    e.preventDefault();
+  }
+});
+</script>
 
 <footer class="bg-black bg-opacity-80 text-white py-6">
     <div class="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
