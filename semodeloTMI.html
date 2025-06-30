@@ -166,6 +166,7 @@
       <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
         <img id="preview_foto_retrato"
               src="src/assets/bancoFotos/postula/retrato.jpg"
+              data-default="src/assets/bancoFotos/postula/retrato.jpg"
               alt="Rostro frontal"
               class="w-full h-full object-cover" />
         <input type="file"
@@ -184,7 +185,10 @@
     <div>
      <label for="foto_cuerpo_completo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
       <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
-         <img id="preview_foto_cuerpo_completo" src="src/assets/bancoFotos/postula/completo.jpg" alt="Cuerpo completo"
+         <img id="preview_foto_cuerpo_completo" 
+         src="src/assets/bancoFotos/postula/completo.jpg" 
+         data-default="src/assets/bancoFotos/postula/completo.jpg" 
+         alt="Cuerpo completo"
             class="w-full h-full object-cover" />
           <input type="file" 
                 name="foto_cuerpo_completo" 
@@ -201,7 +205,10 @@
     <div>
       <label for="foto_mitad_cintura" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
       <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
-        <img id="preview_foto_mitad_cintura" src="src/assets/bancoFotos/postula/mitad.jpg" alt="Mitad de cintura"
+        <img id="preview_foto_mitad_cintura" 
+        src="src/assets/bancoFotos/postula/mitad.jpg" 
+        data-default="src/assets/bancoFotos/postula/mitad.jpg" 
+        alt="Mitad de cintura"
             class="w-full h-full object-cover" />
           <input type="file" 
           name="foto_mitad_cintura" 
@@ -223,7 +230,10 @@
     <div>
       <label for="foto_lado_derecho" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
       <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
-        <img id="preview_foto_lado_derecho" src="src/assets/bancoFotos/postula/pderecho.jpg" alt="Perfil derecho"
+        <img id="preview_foto_lado_derecho" 
+        src="src/assets/bancoFotos/postula/pderecho.jpg" 
+        data-default="src/assets/bancoFotos/postula/pderecho.jpg" 
+        alt="Perfil derecho"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_lado_derecho')" />
@@ -236,7 +246,11 @@
     <div>
       <label for="foto_lado_izquierdo" class="group block cursor-pointer hover:scale-[1.03] transition-all duration-300 ease-in-out w-40 h-60 mx-auto">
       <div class="relative w-full h-full flex items-center justify-center overflow-hidden shadow-md hover:shadow-lg bg-white ">
-        <img id="preview_foto_lado_izquierdo" src="src/assets/bancoFotos/postula/pizquierdo.jpg" alt="Perfil izquierdo"
+        <img id="preview_foto_lado_izquierdo" 
+        src="src/assets/bancoFotos/postula/pizquierdo.jpg" 
+        data-default="src/assets/bancoFotos/postula/pizquierdo.jpg" 
+
+        alt="Perfil izquierdo"
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_lado_izquierdo')" />
@@ -282,49 +296,79 @@
   }
 </script>
 
-
 <script>
-const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB por imagen
+const MAX_IMAGE_SIZE = 700 * 1024; // 700KB por imagen
+const MAX_TOTAL_SIZE = 3.5 * 1024 * 1024; // 3.5MB total
 
 function preview(input, targetId) {
   const file = input.files[0];
   const warningId = targetId + '_warning';
   let warning = document.getElementById(warningId);
-
-  // Elimina advertencia previa si existe
   if (warning) warning.remove();
-
   if (file) {
     document.getElementById(targetId).src = URL.createObjectURL(file);
-
     if (file.size > MAX_IMAGE_SIZE) {
-      // Crea advertencia visual sobre la imagen
       const parent = input.closest('.relative');
       const msg = document.createElement('div');
       msg.id = warningId;
       msg.className = "absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-red-400 font-bold text-center text-xs px-2 z-20";
-      msg.innerText = "La imagen supera el máximo permitido (2MB)";
+      msg.innerText = "La imagen supera el máximo permitido (700KB)";
       parent.appendChild(msg);
     }
   }
 }
 
-// Validación antes de enviar el formulario
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
   let valid = true;
+  let totalSize = 0;
   const inputs = this.querySelectorAll('input[type="file"]');
   inputs.forEach(input => {
     const file = input.files[0];
-    if (file && file.size > MAX_IMAGE_SIZE) {
-      valid = false;
-      // Opcional: enfoca el input o muestra un alert
+    if (file) {
+      totalSize += file.size;
+      if (file.size > MAX_IMAGE_SIZE) valid = false;
     }
   });
+  if (totalSize > MAX_TOTAL_SIZE) {
+    alert('La suma de todas las imágenes no debe superar 3.5MB.');
+    return;
+  }
   if (!valid) {
-    alert('Una o más imágenes superan el tamaño máximo permitido (2MB). Corrige antes de enviar.');
-    e.preventDefault();
+    alert('Una o más imágenes superan el tamaño máximo permitido (700KB). Corrige antes de enviar.');
+    return;
+  }
+
+  // Enviar el formulario usando fetch
+  const formData = new FormData(this);
+  try {
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: formData
+    });
+    if (response.ok) {
+      // Mostrar el modal de agradecimiento
+      document.getElementById('thankYouModal').classList.remove('hidden');
+      // Opcional: resetear el formulario
+      this.reset();
+      // Opcional: limpiar previews de imágenes
+      document.querySelectorAll('img[id^="preview_"]').forEach(img => {
+        img.src = img.getAttribute('data-default') || img.src;
+      });
+    } else {
+      // Si es error de tamaño, ya lo manejaste arriba. Otros errores: mensaje genérico.
+      alert('Ocurrió un error al enviar tu postulación. Intenta de nuevo más tarde.');
+    }
+  } catch (err) {
+    alert('Ocurrió un error inesperado. Intenta de nuevo más tarde.');
   }
 });
+
+function closeThankYouModal() {
+  document.getElementById('thankYouModal').classList.add('hidden');
+  // Redirige al formulario (opcional, si quieres recargar la página)
+  window.location.href = window.location.pathname;
+}
 </script>
 
 <footer class="bg-black bg-opacity-80 text-white py-6">
@@ -342,3 +386,17 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         </div>
     </div>
 </footer>
+
+<!-- Modal de agradecimiento -->
+<div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg shadow-lg p-8 max-w-xs w-full text-center">
+    <h2 class="text-2xl font-bold mb-4 text-black">¡Gracias por tu postulación!</h2>
+    <p class="mb-4 text-black">Pronto nos pondremos en contacto contigo.</p>
+    <div class="flex justify-center space-x-4 mb-4">
+      <a href="https://instagram.com/themodelissue" target="_blank" class="text-pink-500 hover:text-pink-700 text-2xl"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/584128703811" target="_blank" class="text-green-500 hover:text-green-700 text-2xl"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <button onclick="closeThankYouModal()" class="mt-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800">Cerrar</button>
+  </div>
+</div>
+</body>

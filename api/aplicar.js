@@ -2,7 +2,10 @@ import multer from 'multer';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 
-const upload = multer({ dest: '/tmp/' });
+const upload = multer({ 
+  dest: '/tmp/',
+  limits: { fileSize: 700 * 1024, files: 5 } // 700KB por archivo, máximo 5 archivos
+});
 
 export const config = {
   api: {
@@ -28,6 +31,20 @@ export default function handler(req, res) {
     try {
       const datos = req.body;
       const files = req.files;
+
+      // Validar tamaño total de archivos
+      let totalSize = 0;
+      for (const campo in files) {
+        const file = files[campo][0];
+        totalSize += file.size;
+      }
+      if (totalSize > 3.5 * 1024 * 1024) { // 3.5MB
+        // Borra los archivos temporales
+        for (const campo in files) {
+          fs.unlinkSync(files[campo][0].path);
+        }
+        return res.status(400).json({ error: 'La suma de todas las imágenes no debe superar 3.5MB.' });
+      }
 
       const attachments = [];
       for (const campo in files) {
