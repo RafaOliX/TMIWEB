@@ -74,14 +74,40 @@
       <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST">
 
   <!-- 1. Género -->
-  <div>
-    <label class="block font-medium mb-1">GÉNERO</label>
-    <div class="flex gap-1">
-      <label><input type="radio" name="genero" value="Mujer" required> MUJER</label>
-      <label><input type="radio" name="genero" value="Hombre"> HOMBRE</label>
-      <label><input type="radio" name="genero" value="No Binario"> NO BINARIO</label>
-    </div>
+<div class="mb-6">
+  <label class="block text-sm font-semibold text-white mb-3">GÉNERO</label>
+  <div class="flex gap-4">
+    
+    <!-- Opción MUJER -->
+    <input type="radio" id="genero-mujer" name="genero" value="Mujer" class="sr-only peer/mujer" required>
+    <label for="genero-mujer"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/mujer:border-gray-300 peer-checked/mujer:bg-gray-200/10 peer-checked/mujer:text-white
+             transition-colors duration-200">
+      MUJER
+    </label>
+
+    <!-- Opción HOMBRE -->
+    <input type="radio" id="genero-hombre" name="genero" value="Hombre" class="sr-only peer/hombre">
+    <label for="genero-hombre"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/hombre:border-gray-300 peer-checked/hombre:bg-gray-200/10 peer-checked/hombre:text-white
+             transition-colors duration-200">
+      HOMBRE
+    </label>
+
+    <!-- Opción NO BINARIO -->
+    <input type="radio" id="genero-nobinario" name="genero" value="No Binario" class="sr-only peer/nb">
+    <label for="genero-nobinario"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/nb:border-gray-300 peer-checked/nb:bg-gray-200/10 peer-checked/nb:text-white
+             transition-colors duration-200">
+      NO BINARIO
+    </label>
+
   </div>
+</div>
+
 
   <!-- Nombre y edad -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -98,24 +124,46 @@
   
   <!-- ¿Es estudiante? -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <label class="block font-medium mb-1">¿Eres estudiante?</label>
-      <select name="estudiante" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="Sí">Sí</option>
-        <option value="No">No</option>
-      </select>
-    </div>
+    <!-- ¿Eres estudiante? -->
+<div class="mb-6">
+  <label class="block text-sm  text-white mb-3">¿Eres estudiante?</label>
+  <div class="flex gap-4">
+    <input type="radio" id="estudiante-si" name="estudiante" value="Sí" class="sr-only peer/si" required>
+    <label for="estudiante-si"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/si:border-gray-300 peer-checked/si:bg-gray-200/10 peer-checked/si:text-white transition-colors duration-200">
+      SÍ
+    </label>
 
-    <!-- ¿Tiene pasaporte vigente? -->
-    <div>
-      <label class="block font-medium mb-1">¿Tienes pasaporte vigente?</label>
-      <select name="pasaporte" required class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="Sí">Sí</option>
-        <option value="No">No</option>
-      </select>
-    </div>
+    <input type="radio" id="estudiante-no" name="estudiante" value="No" class="sr-only peer/no">
+    <label for="estudiante-no"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/no:border-gray-300 peer-checked/no:bg-gray-200/10 peer-checked/no:text-white transition-colors duration-200">
+      NO
+    </label>
+  </div>
+</div>
+
+<!-- ¿Tienes pasaporte vigente? -->
+<div class="mb-6">
+  <label class="block text-sm  text-white mb-3">¿Tienes pasaporte vigente?</label>
+  <div class="flex gap-4">
+    <input type="radio" id="pasaporte-si" name="pasaporte" value="Sí" class="sr-only peer/psi" required>
+    <label for="pasaporte-si"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/psi:border-gray-300 peer-checked/psi:bg-gray-200/10 peer-checked/psi:text-white transition-colors duration-200">
+      SÍ
+    </label>
+
+    <input type="radio" id="pasaporte-no" name="pasaporte" value="No" class="sr-only peer/pno">
+    <label for="pasaporte-no"
+      class="block px-4 py-2 text-sm rounded-md border border-gray-700 text-gray-400 cursor-pointer
+             peer-checked/pno:border-gray-300 peer-checked/pno:bg-gray-200/10 peer-checked/pno:text-white transition-colors duration-200">
+      NO
+    </label>
+  </div>
+</div>
+
   </div>
 
   <!-- Número de contacto del modelo -->
