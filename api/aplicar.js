@@ -18,7 +18,12 @@ export default function handler(req, res) {
     { name: 'foto_lado_derecho' },
     { name: 'foto_lado_izquierdo' }
   ])(req, res, async function (err) {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'Una o más imágenes superan el tamaño máximo permitido (1MB).' });
+      }
+      return res.status(500).json({ error: err.message });
+    }
 
     try {
       const datos = req.body;
