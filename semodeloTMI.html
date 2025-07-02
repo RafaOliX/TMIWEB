@@ -78,7 +78,7 @@
     <div class="bg-[#1d1d1d56] text-white rounded-md shadow-md p-4 md:p-8 m-2 md:m-4 border border-gray-300 2xl:col-span-6">
       <h2 class="text-2xl font-bold mb-0 text-center tracking-wide"></h2>
       
-      <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST">
+      <form id="contactForm" class="space-y-5 text-sm" enctype="multipart/form-data" action="/api/aplicar" method="POST" >
 
   <!-- 1. Género -->
 <div class="mb-6">
@@ -245,6 +245,7 @@
                 required
                 class="absolute inset-0 opacity-0 cursor-pointer"
                 onchange="preview(this, 'preview_foto_retrato')" />
+        <div class="foto-error-msg absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-red-200 font-semibold pointer-events-none px-2 py-1 rounded bg-black bg-opacity-70"></div>
       </div>
        <div class=" text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1 ">Rostro de frente</div>
       </label>
@@ -265,6 +266,7 @@
                 accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" 
             onchange="preview(this, 'preview_foto_cuerpo_completo')" />
+            <div class="foto-error-msg absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-red-200 font-semibold pointer-events-none px-2 py-1 rounded bg-black bg-opacity-70"></div>
         </div>
         <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Cuerpo completo</div>
       </label>
@@ -285,6 +287,7 @@
           accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" 
           onchange="preview(this, 'preview_foto_mitad_cintura')" />
+          <div class="foto-error-msg absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-red-200 font-semibold pointer-events-none px-2 py-1 rounded bg-black bg-opacity-70"></div>
         </div>
         <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Mitad de cintura</div>
       </label>
@@ -306,6 +309,7 @@
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_derecho" id="foto_lado_derecho" accept="image/*" required
           class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_lado_derecho')" />
+          <div class="foto-error-msg absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-red-200 font-semibold pointer-events-none px-2 py-1 rounded bg-black bg-opacity-70"></div>
         </div>
         <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Perfil derecho</div>
       </label>
@@ -323,6 +327,7 @@
             class="w-full h-full object-cover" />
           <input type="file" name="foto_lado_izquierdo" id="foto_lado_izquierdo" accept="image/*" required
             class="absolute inset-0 opacity-0 cursor-pointer" onchange="preview(this, 'preview_foto_lado_izquierdo')" />
+            <div class="foto-error-msg absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-red-200 font-semibold pointer-events-none px-2 py-1 rounded bg-black bg-opacity-70"></div>
         </div>
         <div class="text-xs text-center text-black font-medium bg-white backdrop-blur-sm py-1">Perfil izquierdo</div>
       </label>
@@ -334,7 +339,11 @@
 
 
 
-
+<!-- Mensaje de error visual -->
+<div id="formErrorMsg" class="hidden transition-all duration-300 ease-in-out bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center justify-center gap-2 text-base font-semibold">
+  <i class="fas fa-exclamation-circle"></i>
+  <span id="formErrorMsgText"></span>
+</div>
 
 
         <button type="submit" class="w-full bg-zinc-300 hover:bg-slate-500 text-black py-3 my-3 cursor-pointer rounded-md font-semibold tracking-wide transition">
@@ -358,100 +367,90 @@
 
 <script>
   function preview(input, targetId) {
-    const file = input.files[0];
-    if (file) {
-      document.getElementById(targetId).src = URL.createObjectURL(file);
-    }
-  }
-</script>
-
-<script>
-const MAX_IMAGE_SIZE = 700 * 1024; // 700KB por imagen
-const MAX_TOTAL_SIZE = 3.5 * 1024 * 1024; // 3.5MB total
-
-function preview(input, targetId) {
   const file = input.files[0];
   const warningId = targetId + '_warning';
   let warning = document.getElementById(warningId);
   if (warning) warning.remove();
+  const contenedor = input.closest('.relative');
+  const msgDiv = contenedor ? contenedor.querySelector('.foto-error-msg') : null;
+
   if (file) {
     document.getElementById(targetId).src = URL.createObjectURL(file);
-    if (file.size > MAX_IMAGE_SIZE) {
-      const parent = input.closest('.relative');
-      const msg = document.createElement('div');
-      msg.id = warningId;
-      msg.className = "absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-red-400 font-bold text-center text-xs px-2 z-20";
-      msg.innerText = "La imagen supera el máximo permitido (700KB)";
-      parent.appendChild(msg);
+    // Limpia errores visuales previos
+    if (contenedor) contenedor.classList.remove('bg-red-100', 'border-red-400');
+    input.classList.remove('border-red-400');
+    if (msgDiv) msgDiv.innerText = '';
+
+    // Si la foto supera el límite, muestra el mensaje y marca el recuadro
+    if (file.size > 700 * 1024) {
+      if (contenedor) contenedor.classList.add('bg-red-100', 'border-red-400');
+      input.classList.add('border-red-400');
+      if (msgDiv) msgDiv.innerText = 'La imagen supera el máximo permitido (700KB)';
     }
   }
 }
 
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  let valid = true;
-  let totalSize = 0;
-  const inputs = this.querySelectorAll('input[type="file"]');
-  inputs.forEach(input => {
-    const file = input.files[0];
-    if (file) {
-      totalSize += file.size;
-      if (file.size > MAX_IMAGE_SIZE) valid = false;
-    }
-  });
-  if (totalSize > MAX_TOTAL_SIZE) {
-    alert('La suma de todas las imágenes no debe superar 3.5MB.');
-    return;
-  }
-  if (!valid) {
-    alert('Una o más imágenes superan el tamaño máximo permitido (700KB). Corrige antes de enviar.');
-    return;
-  }
-
-  // Antes de crear el FormData:
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  // Validación especial para altura (si quieres permitir coma)
   const alturaInput = this.querySelector('input[name="altura"]');
   if (alturaInput) {
-    // Normaliza: reemplaza coma por punto y elimina espacios
     let valor = alturaInput.value.trim().replace(',', '.');
-    // Valida que sea un número decimal válido (no letras)
-    if (!/^\d+(\.\d+)?$/.test(valor)) {
-      alert('Por favor ingresa una altura válida (ejemplo: 1.75 o 1,75)');
+    if (valor && !/^\d+(\.\d+)?$/.test(valor)) {
+      e.preventDefault();
+      alturaInput.classList.add('border-red-400');
       alturaInput.focus();
+      alert('Por favor ingresa una altura válida (ejemplo: 1.75 o 1,75)');
       return;
+    } else {
+      alturaInput.value = valor;
     }
-    alturaInput.value = valor;
   }
 
-  // Enviar el formulario usando fetch
-  const formData = new FormData(this);
-  try {
-    const response = await fetch(this.action, {
-      method: 'POST',
-      body: formData
-    });
-    if (response.ok) {
-      // Mostrar el modal de agradecimiento
-      document.getElementById('thankYouModal').classList.remove('hidden');
-      // Opcional: resetear el formulario
-      this.reset();
-      // Opcional: limpiar previews de imágenes
-      document.querySelectorAll('img[id^="preview_"]').forEach(img => {
-        img.src = img.getAttribute('data-default') || img.src;
-      });
-    } else {
-      // Si es error de tamaño, ya lo manejaste arriba. Otros errores: mensaje genérico.
-      alert('Ocurrió un error al enviar tu postulación. Intenta de nuevo más tarde.');
+  // Validación personalizada solo para fotos polas
+  const fotosRequeridas = [
+    'foto_retrato',
+    'foto_cuerpo_completo',
+    'foto_mitad_cintura',
+    'foto_lado_derecho',
+    'foto_lado_izquierdo'
+  ];
+  let validFotos = true;
+  for (const nombre of fotosRequeridas) {
+    const input = this.querySelector(`input[name="${nombre}"]`);
+    const contenedor = input.closest('.relative');
+    const msgDiv = contenedor ? contenedor.querySelector('.foto-error-msg') : null;
+    input.classList.remove('border-red-400');
+    if (contenedor) contenedor.classList.remove('bg-red-100', 'border-red-400');
+    if (msgDiv) msgDiv.innerText = '';
+    if (!input.files.length) {
+      e.preventDefault();
+      input.classList.add('border-red-400');
+      if (contenedor) contenedor.classList.add('bg-red-100', 'border-red-400');
+      if (msgDiv) msgDiv.innerText = 'Debes subir esta foto';
+      validFotos = false;
+    } else if (input.files[0].size > 700 * 1024) {
+      e.preventDefault();
+      input.classList.add('border-red-400');
+      if (contenedor) contenedor.classList.add('bg-red-100', 'border-red-400');
+      if (msgDiv) msgDiv.innerText = 'La imagen supera el máximo permitido (700KB)';
+      validFotos = false;
     }
-  } catch (err) {
-    alert('Ocurrió un error inesperado. Intenta de nuevo más tarde.');
+  }
+  // Si hay error en fotos, sube el scroll al primero
+  if (!validFotos) {
+    const firstFoto = this.querySelector('.border-red-400');
+    if (firstFoto) firstFoto.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 });
 
-function closeThankYouModal() {
-  document.getElementById('thankYouModal').classList.add('hidden');
-  // Redirige al formulario (opcional, si quieres recargar la página)
-  window.location.href = window.location.pathname;
-}
+document.querySelectorAll('#contactForm .input-field[required]').forEach(input => {
+  input.addEventListener('invalid', function() {
+    this.classList.add('border-red-400');
+  });
+  input.addEventListener('input', function() {
+    this.classList.remove('border-red-400');
+  });
+});
 </script>
 
 <footer class="bg-black bg-opacity-80 text-white py-6">
@@ -489,5 +488,7 @@ document.querySelector('input[name="altura"]').addEventListener('input', functio
   this.value = this.value.replace(/[^0-9.,]/g, '');
 });
 </script>
+<!-- Mensaje de error -->
+<div id="formErrorMsg" class="hidden text-red-500 font-semibold text-center mb-4"></div>
 </body>
 </html>
