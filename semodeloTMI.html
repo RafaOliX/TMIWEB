@@ -413,7 +413,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   if (alturaInput) {
     // Normaliza: reemplaza coma por punto y elimina espacios
     let valor = alturaInput.value.trim().replace(',', '.');
-    // Valida que sea un número decimal válido
+    // Valida que sea un número decimal válido (no letras)
     if (!/^\d+(\.\d+)?$/.test(valor)) {
       alert('Por favor ingresa una altura válida (ejemplo: 1.75 o 1,75)');
       alturaInput.focus();
@@ -482,4 +482,12 @@ function closeThankYouModal() {
     <button onclick="closeThankYouModal()" class="mt-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800">Cerrar</button>
   </div>
 </div>
+
+<script>
+document.querySelector('input[name="altura"]').addEventListener('input', function(e) {
+  // Solo permite dígitos, punto y coma
+  this.value = this.value.replace(/[^0-9.,]/g, '');
+});
+</script>
 </body>
+</html>
