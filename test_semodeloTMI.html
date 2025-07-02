@@ -1,0 +1,150 @@
+<!-- test_semodeloTMI.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Compresión de Fotos - semodeloTMI.html</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .test-result { margin: 1em 0; padding: 1em; border-radius: 6px; }
+    .ok { background: #e6ffe6; color: #1a7f1a; }
+    .fail { background: #ffe6e6; color: #a11a1a; }
+    img { max-width: 200px; margin: 0.5em 0; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Test de Compresión de Fotos para semodeloTMI.html</h1>
+  <input type="file" id="fileInput" accept="image/*" multiple>
+  <button id="compressBtn">Comprimir y Probar</button>
+  <div id="preview"></div>
+  <div id="testResults"></div>
+
+  <script>
+    const MAX_IMAGE_SIZE = 700 * 1024; // 700KB
+    const MAX_TOTAL_SIZE = 3.5 * 1024 * 1024; // 3.5MB
+
+    // Utilidad para comprimir una imagen usando canvas
+    async function compressImage(file, maxSizeKB = 700, maxWidth = 1200, maxHeight = 1600) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = function() {
+          let [w, h] = [img.width, img.height];
+          if (w > maxWidth || h > maxHeight) {
+            const ratio = Math.min(maxWidth / w, maxHeight / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+
+          let quality = 0.85;
+          function tryCompress() {
+            canvas.toBlob(blob => {
+              if (blob.size <= maxSizeKB * 1024 || quality < 0.4) {
+                resolve(blob);
+              } else {
+                quality -= 0.10;
+                tryCompress();
+              }
+            }, 'image/jpeg', quality);
+          }
+          tryCompress();
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    // Mostrar previews y resultados
+    function showPreview(files, compressedBlobs) {
+      const preview = document.getElementById('preview');
+      preview.innerHTML = '';
+      files.forEach((file, idx) => {
+        const orig = document.createElement('div');
+        orig.innerHTML = `<strong>Original:</strong> ${(file.size/1024).toFixed(1)} KB<br>`;
+        const origImg = document.createElement('img');
+        origImg.src = URL.createObjectURL(file);
+        orig.appendChild(origImg);
+
+        const comp = document.createElement('div');
+        comp.innerHTML = `<strong>Comprimido:</strong> ${(compressedBlobs[idx].size/1024).toFixed(1)} KB<br>`;
+        const compImg = document.createElement('img');
+        compImg.src = URL.createObjectURL(compressedBlobs[idx]);
+        comp.appendChild(compImg);
+
+        preview.appendChild(orig);
+        preview.appendChild(comp);
+      });
+    }
+
+    // Ejecutar pruebas automáticas
+    async function runTests(files, compressedBlobs) {
+      const results = [];
+      // Test 1: Cada imagen debe ser <= 700KB
+      let allOk = true;
+      compressedBlobs.forEach((blob, idx) => {
+        if (blob.size > MAX_IMAGE_SIZE) {
+          results.push(`<div class="test-result fail">❌ Imagen ${idx+1} sigue siendo mayor a 700KB (${(blob.size/1024).toFixed(1)} KB)</div>`);
+          allOk = false;
+        } else {
+          results.push(`<div class="test-result ok">✔️ Imagen ${idx+1} comprimida correctamente (${(blob.size/1024).toFixed(1)} KB)</div>`);
+        }
+      });
+      // Test 2: Suma total no debe superar 3.5MB
+      const total = compressedBlobs.reduce((acc, b) => acc + b.size, 0);
+      if (total > MAX_TOTAL_SIZE) {
+        results.push(`<div class="test-result fail">❌ El total de imágenes comprimidas supera 3.5MB (${(total/1024/1024).toFixed(2)} MB)</div>`);
+        allOk = false;
+      } else {
+        results.push(`<div class="test-result ok">✔️ El total de imágenes comprimidas es válido (${(total/1024/1024).toFixed(2)} MB)</div>`);
+      }
+      document.getElementById('testResults').innerHTML = results.join('');
+      return allOk;
+    }
+
+    // Evento principal
+    document.getElementById('compressBtn').onclick = async function() {
+      const files = Array.from(document.getElementById('fileInput').files);
+      if (!files.length) {
+        alert('Selecciona al menos una imagen.');
+        return;
+      }
+      // Comprimir si es necesario
+      const compressedBlobs = [];
+      for (const file of files) {
+        if (file.size > MAX_IMAGE_SIZE) {
+          const compressed = await compressImage(file, 700);
+          compressedBlobs.push(compressed);
+        } else {
+          compressedBlobs.push(file);
+        }
+      }
+      showPreview(files, compressedBlobs);
+      runTests(files, compressedBlobs);
+    };
+
+    // Test automático: genera una imagen grande y la comprime
+    async function autoTestBigImage() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 2000;
+      canvas.height = 2000;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = "#f00";
+      ctx.fillRect(0,0,2000,2000);
+      const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', 1));
+      const compressed = await compressImage(blob, 700);
+      let msg = '';
+      if (compressed.size <= MAX_IMAGE_SIZE) {
+        msg = `<div class="test-result ok">✔️ Test automático: imagen de 2000x2000px comprimida a ${(compressed.size/1024).toFixed(1)} KB</div>`;
+      } else {
+        msg = `<div class="test-result fail">❌ Test automático: imagen de 2000x2000px sigue siendo muy grande (${(compressed.size/1024).toFixed(1)} KB)</div>`;
+      }
+      document.getElementById('testResults').insertAdjacentHTML('beforeend', msg);
+    }
+    autoTestBigImage();
+  </script>
+</body>
+</html>
