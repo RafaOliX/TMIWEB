@@ -189,7 +189,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
       <label class="block font-medium mb-1">Altura (cm)</label>
-      <input type="number" name="altura" step="any" placeholder="¿Cuánto mides?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1  focus:outline-none  focus:border-b-slate-100">
+      <input type="text" name="altura" inputmode="decimal" pattern="[0-9]+([.,][0-9]+)?" placeholder="¿Cuánto mides?" class="input-field w-full border-b-1 border-t-1 border-gray-400 p-1 focus:outline-none focus:border-b-slate-100">
     </div>
 
     <div>
@@ -410,8 +410,16 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
   // Antes de crear el FormData:
   const alturaInput = this.querySelector('input[name="altura"]');
-  if (alturaInput && alturaInput.value.includes(',')) {
-    alturaInput.value = alturaInput.value.replace(',', '.');
+  if (alturaInput) {
+    // Normaliza: reemplaza coma por punto y elimina espacios
+    let valor = alturaInput.value.trim().replace(',', '.');
+    // Valida que sea un número decimal válido
+    if (!/^\d+(\.\d+)?$/.test(valor)) {
+      alert('Por favor ingresa una altura válida (ejemplo: 1.75 o 1,75)');
+      alturaInput.focus();
+      return;
+    }
+    alturaInput.value = valor;
   }
 
   // Enviar el formulario usando fetch
