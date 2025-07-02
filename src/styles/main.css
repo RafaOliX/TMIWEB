@@ -16,17 +16,20 @@ header {
 
 
 /* NAVBAR */
+/* --- NAVBAR FIJO ARRIBA --- */
 nav {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000; /* Asegúrate de que sea mayor que el video y el overlay */
   background-color: #000;
+  border-bottom: #444 2px solid;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px 0 10px;
+  padding: 0 0 0 10px;
   color: white;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: #444 2px solid;
+  animation: slideDownNav 1s cubic-bezier(.77,0,.18,1) 0.2s both;
 }
 
 .logo {
@@ -119,26 +122,6 @@ nav {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* --- RESPONSIVE --- */
 
 /* Responsive: 2 columnas en tablet y 2 columnas en móvil */
@@ -182,9 +165,9 @@ body {
 }
 
 /* Animación de entrada para el navbar */
-nav {
+/* nav {
   animation: slideDownNav 1s cubic-bezier(.77,0,.18,1) 0.2s both;
-}
+} */
 @keyframes slideDownNav {
   from { transform: translateY(-60px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
@@ -246,7 +229,6 @@ video[autoplay] {
   nav {
     flex-direction: column;
     align-items: center; /* Centra horizontalmente */
-    position: sticky;
     top: 0;
     z-index: 1000;
   }

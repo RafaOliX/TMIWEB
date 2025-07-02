@@ -33,14 +33,21 @@
   </a>
 </div>
 
+<!-- Video de fondo fijo -->
+<div class="fixed inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+<video
+  class="w-full h-full object-cover object-center min-w-full min-h-full"
+  autoplay loop muted playsinline
+  style="background-repeat: repeat; background-size: cover;"
+  src="src/assets/inicio/inicio-video.mp4">
+</video>
+</div>
+<!-- Overlay opcional para oscurecer el video -->
 
-<section class="overflow-hidden min-h-[88dvh] flex justify-center mx-2 2xl:mx-48">
-  <!-- Video de fondo -->
-  <video class="absolute top-0 left-0 w-full h-full object-cover z-0" autoplay loop muted playsinline src="src/assets/inicio/inicio-video.mp4"></video>
-  <!-- Overlay opcional para oscurecer el video -->
+<section class="relative min-h-[88dvh] flex justify-center mx-2 2xl:mx-48 overflow-auto">
   <div class="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>
 
-  <div class="w-full grid grid-cols-1 2xl:grid-cols-10 gap-0 2xl:gap-0 z-20 items-start">
+  <div class="relative w-full grid grid-cols-1 2xl:grid-cols-10 gap-0 2xl:gap-0 z-20 items-start">
     <!-- Columna de advertencia -->
     <div class="bg-[#1d1d1d56] rounded-md shadow-md p-4 md:p-8 m-2 md:m-4 border border-gray-300 text-slate-50 text-sm leading-relaxed 2xl:col-span-4">
       <h2 class="text-2xl font-bold mb-4">📸 Requisitos para tu Aplicación</h2>
