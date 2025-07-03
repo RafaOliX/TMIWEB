@@ -391,6 +391,8 @@
 }
 
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault(); // ¡Esto es clave!
+
   // Validación especial para altura (si quieres permitir coma)
   const alturaInput = this.querySelector('input[name="altura"]');
   if (alturaInput) {
@@ -448,7 +450,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   // Enviar el formulario usando fetch
   const formData = new FormData(this);
   try {
-    const response = await fetch(this.action, {
+    const response = await fetch('/api/aplicar', { // Usa la ruta absoluta aquí
       method: 'POST',
       body: formData
     });
