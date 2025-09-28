@@ -45,56 +45,76 @@
     <div class="subtitle">DISPONIBLES PARA </br>MODA, COMERCIAL, PASARELA</div>
   </header>
   <section>
-    <div class="divider"><button>Hombres</button></div>
-    <div class="divider"><button>Mujeres</button></div>
-  
+    <div class="divider flex justify-center gap-4 my-4">
+      <button id="btnMujeres" class="filter-btn px-6 py-2 rounded-full font-bold bg-black text-white border-2 border-white hover:bg-white hover:text-black transition">Mujeres</button>
+      <button id="btnHombres" class="filter-btn px-6 py-2 rounded-full font-bold bg-black text-white border-2 border-white hover:bg-white hover:text-black transition">Hombres</button>
+    </div>
   </section>
   <main>
+    <!-- Galería de modelos -->
+    <!-- fila 1 mujeres-->
     <section class="gallery-2x2">
-      <!-- Fila 1 -->
-      <div class="cell">
-        <div class="model-photo">
-          <div class="img-container">
-            <a href="detalle.html?id=miranda">
-              <img src="src/assets/modelos/Miranda/miranda.avif" alt="Miranda">
-              <div class="img-overlay"></div>
-            </a>
-          </div>
+  <!-- Foto -->
+    <div class="cell-genero" data-genero="mujer">
+    <div class="cell">
+      <div class="model-photo">
+        <div class="img-container">
+          <a href="detalle.html?id=alcalasoffia">
+            <img src="src/assets/modelos/Alcalá Soffia/alcala_soffia_1.jpeg" alt="Alcala">
+            <div class="img-overlay"></div>
+          </a>
         </div>
       </div>
-      <a href="detalle.html?id=miranda">
-      <div class="cell">
-        <div class="model-info">
-            <div class="model-info-overlay"></div>
-            <h2>MIRANDA</h2>
-            <div class="model-attr">Red Hair</div>
-            <div class="model-attr">56-60 kg</div>
-            <div class="model-attr">166-170 cm</div>
+    </div>
+    </div>
+  <!-- Info -->
+   <div class="cell-genero" data-genero="mujer">
+        <a href="detalle.html?id=alcalasoffia">
+          <div class="cell">
+        
+            <div class="model-info">
+          <div class="model-info-overlay"></div>
+          <h2>ALCALA</h2>
+          <div class="model-attr">Red Hair</div>
+          <div class="model-attr">56-60 kg</div>
+          <div class="model-attr">166-170 cm</div>
         </div>
       </div>
     </a>
-      <div class="cell">
-        <a href="detalle.html?id=sofia">
-          <div class="model-photo">
-            <div class="img-container">
-              <img src="src/assets/modelos/Sofia/sofia.avif" alt="Sofia">
-              <div class="img-overlay"></div>
+    </div>
+
+
+    <!-- FOTO-->
+      <div class="cell-genero" data-genero="mujer">
+        <div class="cell">
+          <a href="detalle.html?id=alcelciojailin">
+            <div class="model-photo">
+              <div class="img-container">
+                <img src="src/assets/modelos/Alecio Jailin/alecio_jailin_1.jpg" alt="Alecio">
+                <div class="img-overlay"></div>
+              </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <a href="detalle.html?id=sofia">
-      <div class="cell">
-        <div class="model-info">
-          <div class="model-info-overlay"></div>
-            <h2>SOFIA</h2>
-            <div class="model-attr">Blonde Hair</div>
-            <div class="model-attr">50-55 kg</div>
-            <div class="model-attr">160-165 cm</div>
-          </div>
+          </a>
         </div>
-      </a>
-      <!-- Fila 2 -->
+      </div>
+      <div class="cell-genero" data-genero="mujer">
+        <a href="detalle.html?id=alecio">
+          <div class="cell">
+        
+            <div class="model-info">
+          <div class="model-info-overlay"></div>
+          <h2>ALECIO</h2>
+          <div class="model-attr">Red Hair</div>
+          <div class="model-attr">56-60 kg</div>
+          <div class="model-attr">166-170 cm</div>
+        </div>
+      </div>
+    </a>
+    </div>
+
+      <!-- Fila 2 mujeres-->
+
+    <div class="cell-genero" data-genero="mujer">
       <div class="cell">
         <a href="detalle.html?id=elie">
           <div class="model-photo">
@@ -105,18 +125,23 @@
           </div>
         </a>
       </div>
-      <a href="detalle.html?id=elie">
-      <div class="cell">
-
-        <div class="model-info">
-            <div class="model-info-overlay"></div>
-            <h2>ELIE</h2>
-            <div class="model-attr">Black Hair</div>
-            <div class="model-attr">61-65 kg</div>
-            <div class="model-attr">171-175 cm</div>
-          </div>
+    </div>
+      <div class="cell-genero" data-genero="mujer">
+        <a href="detalle.html?id=elie">
+          <div class="cell">
+        
+            <div class="model-info">
+          <div class="model-info-overlay"></div>
+          <h2>ELIE</h2>
+          <div class="model-attr">Red Hair</div>
+          <div class="model-attr">56-60 kg</div>
+          <div class="model-attr">166-170 cm</div>
         </div>
-      </a>
+      </div>
+    </a>
+    </div>
+
+    <div class="cell-genero" data-genero="mujer">
       <div class="cell">
         <a href="detalle.html?id=camila">
           <div class="model-photo">
@@ -127,6 +152,8 @@
           </div>
         </a>
       </div>
+    </div>
+      <div class="cell-genero" data-genero="mujer">
       <a href="detalle.html?id=camila">
       <div class="cell">
         <div class="model-info">
@@ -138,6 +165,7 @@
         </div>
       </div>
     </a>
+    </div>
       <!-- Fila 3 -->
       <div class="cell">
 
@@ -213,6 +241,33 @@
       <!-- Si quieres dejar columnas vacías para completar la fila, agrega div vacíos -->
 
       <!-- ...agrega más modelos siguiendo el patrón foto, texto, foto, texto... -->
+
+
+
+
+      <!-- Juan Foto (hombre) -->
+  <div class="cell-genero cell" data-genero="hombre">
+    <div class="model-photo">
+      <div class="img-container">
+        <a href="detalle.html?id=juan">
+          <img src="src/assets/modelos/Juan/juan.avif" alt="Juan">
+          <div class="img-overlay"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Juan Info (hombre) -->
+  <div class="cell-genero cell" data-genero="hombre">
+    <a href="detalle.html?id=juan">
+      <div class="model-info">
+        <div class="model-info-overlay"></div>
+        <h2>JUAN</h2>
+        <div class="model-attr">Brown Hair</div>
+        <div class="model-attr">70-75 kg</div>
+        <div class="model-attr">180-185 cm</div>
+      </div>
+    </a>
+  </div>
     </section>
   </main>
 
@@ -223,6 +278,41 @@
 
 
   <footer class="bg-black bg-opacity-80 text-white py-6">
+</main>
+
+<script>
+// Filtro de género para la galería
+document.getElementById('btnMujeres').addEventListener('click', function() {
+  document.querySelectorAll('.gallery-2x2 .cell-genero').forEach(cell => {
+    if (cell.getAttribute('data-genero') === 'mujer') {
+      cell.style.display = '';
+    } else {
+      cell.style.display = 'none';
+    }
+  });
+  this.classList.add('bg-white', 'text-black');
+  this.classList.remove('bg-black', 'text-white');
+  document.getElementById('btnHombres').classList.remove('bg-white', 'text-black');
+  document.getElementById('btnHombres').classList.add('bg-black', 'text-white');
+});
+
+document.getElementById('btnHombres').addEventListener('click', function() {
+  document.querySelectorAll('.gallery-2x2 .cell-genero').forEach(cell => {
+    if (cell.getAttribute('data-genero') === 'hombre') {
+      cell.style.display = '';
+    } else {
+      cell.style.display = 'none';
+    }
+  });
+  this.classList.add('bg-white', 'text-black');
+  this.classList.remove('bg-black', 'text-white');
+  document.getElementById('btnMujeres').classList.remove('bg-white', 'text-black');
+  document.getElementById('btnMujeres').classList.add('bg-black', 'text-white');
+});
+
+// Mostrar solo mujeres por defecto
+document.getElementById('btnMujeres').click();
+</script>
     <div class="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
         <div class="mb-4 md:mb-0 text-center md:text-left">
             &copy; 2025 THE MODEL ISSUE. Todos los derechos reservados.

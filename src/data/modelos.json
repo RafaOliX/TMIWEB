@@ -1,12 +1,17 @@
 [
   {
-    "id": "miranda",
-    "nombre": "Miranda",
-    "foto": "src/assets/modelos/Miranda/miranda.avif",
-    "cabello": "Red Hair",
-    "peso": "56-60 kg",
-    "altura": "166-170 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
+    "id": "alcalasoffia",
+    "nombre": "Alcala Soffia",
+    "foto": "src/assets/modelos/Alcalá Soffia/alcala_soffia_1.jpeg",
+    "altura": "170 CM",
+    "busto": "86 CM",
+    "cintura": "64 CM",
+    "cadera": "91 CM",
+    "franela": "S",
+    "pantalon": "36",
+    "zapato": "37",
+    "ojos": "MARRONES",
+    "cabello": "CASTAÑO RIZADO"
 
   },
   {
