@@ -55,9 +55,17 @@
     .then(modelos => {
       const modelo = modelos.find(m => m.id === id);
       if (!modelo) {
-        document.getElementById('modelo-detalle').innerHTML = '<p class="text-white p-8">Modelo no encontrado.</p>';
-        return;
-      }
+  const contenedor = document.getElementById('modelo-detalle');
+  contenedor.className = "w-full max-w-3xl sm:max-w-4xl md:max-w-6xl bg-stone-800 rounded-lg shadow-lg flex items-center justify-center min-h-[300px]";
+
+  contenedor.innerHTML = `
+    <p class="text-white text-center text-lg font-semibold">
+      AUN NO HEMOS AGREGADO ESTE MODELO. POR FAVOR, REGRESA MÁS TARDE. 😘
+    </p>
+  `;
+  return;
+}
+
       document.getElementById('modelo-detalle').innerHTML = `
         <!-- Columna de datos -->
         <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col justify-center bg-stone-950 text-white">
