@@ -51,15 +51,10 @@
     </div>
   </section>
   <main>
-
-    <!--  
-
-    comentario 
-
-     Galería de modelos 
-     fila 1 mujeres
-    <section class="gallery-2x2" id="gallery">
-   Foto 
+    <!-- Galería de modelos -->
+    <!-- fila 1 mujeres-->
+    <section class="gallery-2x2">
+  <!-- Foto -->
     <div class="cell-genero" data-genero="mujer">
     <div class="cell">
       <div class="model-photo">
@@ -72,7 +67,7 @@
       </div>
     </div>
     </div>
-   Info 
+  <!-- Info -->
    <div class="cell-genero" data-genero="mujer">
         <a href="detalle.html?id=alcalasoffia">
           <div class="cell">
@@ -89,7 +84,7 @@
     </div>
 
 
-     FOTO
+    <!-- FOTO-->
       <div class="cell-genero" data-genero="mujer">
         <div class="cell">
           <a href="detalle.html?id=alcelciojailin">
@@ -117,7 +112,7 @@
     </a>
     </div>
 
-       Fila 2 mujeres
+      <!-- Fila 2 mujeres-->
 
     
       <div class="cell-genero" data-genero="mujer">
@@ -132,7 +127,7 @@
       </div>
     </div>
     </div>
-   Info 
+  <!-- Info -->
    <div class="cell-genero" data-genero="mujer">
         <a href="detalle.html?id=anasol">
           <div class="cell">
@@ -165,7 +160,7 @@
       </div>
     </div>
     </div>
-   Info 
+  <!-- Info -->
    <div class="cell-genero" data-genero="mujer">
         <a href="detalle.html?id=andradeangely">
           <div class="cell">
@@ -184,7 +179,7 @@
 
 
 
-       Fila 3 
+      <!-- Fila 3 -->
       
 
 
@@ -201,7 +196,7 @@
       </div>
     </div>
     </div>
-   Info 
+  <!-- Info -->
    <div class="cell-genero" data-genero="hombre">
         <a href="detalle.html?id=asuajeroger">
           <div class="cell">
@@ -232,7 +227,7 @@
       </div>
     </div>
     </div>
-   Info 
+  <!-- Info -->
    <div class="cell-genero" data-genero="mujer">
         <a href="detalle.html?id=branchsmiranda">
           <div class="cell">
@@ -249,10 +244,10 @@
     </div>
 
 
-    
-  -->
 
-    <section id="gallery" class="gallery-2x2"></section>
+
+
+    </section>
   </main>
 
 
@@ -265,164 +260,37 @@
 </main>
 
 <script>
-(async function() {
-  const gallery = document.getElementById('gallery');
-  if (!gallery) return;
-
-  // Carga JSON
-  const res = await fetch('src/data/modelos.json', {cache: "force-cache"});
-  const modelos = await res.json();
-
-  // Crea elementos del DOM respetando tu estructura CSS
-  function createModelCells(m) {
-    // Photo cell
-    const photoWrap = document.createElement('div');
-    photoWrap.className = 'cell-genero';
-    photoWrap.setAttribute('data-genero', m.genero || 'mujer');
-
-    const photoCell = document.createElement('div');
-    photoCell.className = 'cell';
-
-    const linkPhoto = document.createElement('a');
-    linkPhoto.href = `detalle.html?id=${encodeURIComponent(m.id)}`;
-
-    const modelPhoto = document.createElement('div');
-    modelPhoto.className = 'model-photo';
-
-    const imgContainer = document.createElement('div');
-    imgContainer.className = 'img-container';
-
-    const img = document.createElement('img');
-    // mostrar solo el primer nombre en alt para accesibilidad
-    const firstNameAlt = (m.titulo || m.nombre || '').toString().trim().split(' ')[0] || (m.titulo || m.nombre || '');
-    img.alt = firstNameAlt;
-    img.dataset.src = (m.fotos && m.fotos[0]) || m.foto || '';
-    img.className = 'lazy';
-    img.loading = 'lazy';
-
-    const overlay = document.createElement('div');
-    overlay.className = 'img-overlay';
-
-    imgContainer.appendChild(img);
-    imgContainer.appendChild(overlay);
-    modelPhoto.appendChild(imgContainer);
-    linkPhoto.appendChild(modelPhoto);
-    photoCell.appendChild(linkPhoto);
-    photoWrap.appendChild(photoCell);
-
-    // Info cell
-    const infoWrap = document.createElement('div');
-    infoWrap.className = 'cell-genero';
-    infoWrap.setAttribute('data-genero', m.genero || 'mujer');
-
-    const infoLink = document.createElement('a');
-    infoLink.href = `detalle.html?id=${encodeURIComponent(m.id)}`;
-
-    const infoCell = document.createElement('div');
-    infoCell.className = 'cell';
-
-    const modelInfo = document.createElement('div');
-    modelInfo.className = 'model-info';
-
-    const infoOverlay = document.createElement('div');
-    infoOverlay.className = 'model-info-overlay';
-
-    const h2 = document.createElement('h2');
-    // mostrar solo el primer nombre en el título (mayúsculas)
-    const firstName = (m.titulo || m.nombre || '').toString().trim().split(' ')[0] || (m.titulo || m.nombre || '');
-    h2.textContent = firstName.toUpperCase();
-    h2.style.position = 'relative';
-    h2.style.zIndex = '3';
-
-    modelInfo.appendChild(infoOverlay);
-    modelInfo.appendChild(h2);
-
-    // Mostrar solo los tres atributos principales en orden: cabello, peso, altura
-    if (m.atributos) {
-      const keys = ['cabello', 'peso', 'altura'];
-      keys.forEach(key => {
-        if (m.atributos[key]) {
-          const a = document.createElement('div');
-          a.className = 'model-attr';
-          a.textContent = m.atributos[key];
-          a.style.color = '#fff';
-          a.style.fontSize = '0.9rem';
-          a.style.fontWeight = '600';
-          a.style.position = 'relative';
-          a.style.zIndex = '3';
-          modelInfo.appendChild(a);
-        }
-      });
+// Filtro de género para la galería
+document.getElementById('btnMujeres').addEventListener('click', function() {
+  document.querySelectorAll('.gallery-2x2 .cell-genero').forEach(cell => {
+    if (cell.getAttribute('data-genero') === 'mujer') {
+      cell.style.display = '';
+    } else {
+      cell.style.display = 'none';
     }
-
-    infoCell.appendChild(modelInfo);
-    infoLink.appendChild(infoCell);
-    infoWrap.appendChild(infoLink);
-
-    return [photoWrap, infoWrap];
-  }
-
-  // Añade al DOM
-  modelos.forEach(m => {
-    const [p, i] = createModelCells(m);
-    gallery.appendChild(p);
-    gallery.appendChild(i);
   });
+  this.classList.add('bg-white', 'text-black');
+  this.classList.remove('bg-black', 'text-white');
+  document.getElementById('btnHombres').classList.remove('bg-white', 'text-black');
+  document.getElementById('btnHombres').classList.add('bg-black', 'text-white');
+});
 
-  // Lazy-loading con IntersectionObserver
-  const lazyImgs = [].slice.call(document.querySelectorAll('img.lazy'));
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-          }
-          img.classList.remove('lazy');
-          observer.unobserve(img);
-        }
-      });
-    }, {rootMargin: '200px 0px'});
+document.getElementById('btnHombres').addEventListener('click', function() {
+  document.querySelectorAll('.gallery-2x2 .cell-genero').forEach(cell => {
+    if (cell.getAttribute('data-genero') === 'hombre') {
+      cell.style.display = '';
+    } else {
+      cell.style.display = 'none';
+    }
+  });
+  this.classList.add('bg-white', 'text-black');
+  this.classList.remove('bg-black', 'text-white');
+  document.getElementById('btnMujeres').classList.remove('bg-white', 'text-black');
+  document.getElementById('btnMujeres').classList.add('bg-black', 'text-white');
+});
 
-    lazyImgs.forEach(img => io.observe(img));
-  } else {
-    // Fallback: cargar todas
-    lazyImgs.forEach(img => { img.src = img.dataset.src || ''; });
-  }
-
-  // Filtro de género (ya usando elementos dinámicos)
-  const btnMujeres = document.getElementById('btnMujeres');
-  const btnHombres = document.getElementById('btnHombres');
-
-  function filterGenero(genero) {
-    document.querySelectorAll('.gallery-2x2 .cell-genero').forEach(cell => {
-      cell.style.display = (cell.getAttribute('data-genero') === genero) ? '' : 'none';
-    });
-  }
-
-  if (btnMujeres && btnHombres) {
-    btnMujeres.addEventListener('click', () => {
-      filterGenero('mujer');
-      btnMujeres.classList.add('bg-white','text-black');
-      btnMujeres.classList.remove('bg-black','text-white');
-      btnHombres.classList.remove('bg-white','text-black');
-      btnHombres.classList.add('bg-black','text-white');
-    });
-
-    btnHombres.addEventListener('click', () => {
-      filterGenero('hombre');
-      btnHombres.classList.add('bg-white','text-black');
-      btnHombres.classList.remove('bg-black','text-white');
-      btnMujeres.classList.remove('bg-white','text-black');
-      btnMujeres.classList.add('bg-black','text-white');
-    });
-
-    // Mostrar mujeres por defecto
-    btnMujeres.click();
-  }
-})();
+// Mostrar solo mujeres por defecto
+document.getElementById('btnMujeres').click();
 </script>
     <div class="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
         <div class="mb-4 md:mb-0 text-center md:text-left">

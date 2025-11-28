@@ -1,76 +1,326 @@
 [
   {
     "id": "alcalasoffia",
-    "nombre": "Alcala Soffia",
-    "foto": "src/assets/modelos/Alcalá Soffia/alcala_soffia_1.jpeg",
-    "altura": "170 CM",
-    "busto": "86 CM",
-    "cintura": "64 CM",
-    "cadera": "91 CM",
-    "franela": "S",
-    "pantalon": "36",
-    "zapato": "37",
-    "ojos": "MARRONES",
-    "cabello": "CASTAÑO RIZADO"
-
+    "nombre": "Alcalá Soffia",
+    "titulo": "Alcalá",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Alcalá Soffia/alcalá_soffia_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "sofia",
-    "nombre": "Sofia",
-    "foto": "src/assets/modelos/Sofia/sofia.avif",
-    "cabello": "Blonde Hair",
-    "peso": "50-55 kg",
-    "altura": "160-165 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-
+    "id": "aleciojailin",
+    "nombre": "Alecio Jailin",
+    "titulo": "Alecio",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Alecio Jailin/alecio_jailin_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "elie",
-    "nombre": "Elie",
-    "foto": "src/assets/modelos/Elie/elie.avif",
-    "cabello": "Brown Hair",
-    "peso": "55-60 kg",
-    "altura": "165-170 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-
+    "id": "anasol",
+    "nombre": "Ana Sol",
+    "titulo": "Sol",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Ana Sol/ana_sol_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "camila",
-    "nombre": "Camila",
-    "foto": "src/assets/modelos/Camila/camila.avif",
-    "cabello": "Black Hair",
-    "peso": "50-55 kg",
-    "altura": "160-165 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-
+    "id": "andradeangely",
+    "nombre": "Andrade Angely",
+    "titulo": "Andrade",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Andrade Angely/andrade_angely_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "ruth",
-    "nombre": "Ruth",
-    "foto": "src/assets/modelos/Ruth/ruth.avif",
-    "cabello": "Brown Hair",
-    "peso": "55-60 kg",
-    "altura": "165-170 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-
+    "id": "asuajeroger",
+    "nombre": "Asuaje Roger",
+    "titulo": "Asuaje",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Asuaje Roger/asuaje_roger_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "meily",
-    "nombre": "Meily",
-    "foto": "src/assets/modelos/Meily/meily.avif",
-    "cabello": "Black Hair",
-    "peso": "50-55 kg",
-    "altura": "160-165 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-
+    "id": "banchsmiranda",
+    "nombre": "Banchs Miranda",
+    "titulo": "Banchs",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Banchs Miranda/banchs_miranda_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
   },
   {
-    "id": "anya",
-    "nombre": "Anya",
-    "foto": "src/assets/modelos/Anya/anya.avif",
-    "cabello": "Black Hair",
-    "peso": "50-55 kg",
-    "altura": "160-165 cm",
-    "descripcion": "Modelo profesional con experiencia en pasarela y fotografía. Disponible para campañas de moda y comerciales."
-}
+    "id": "beta",
+    "nombre": "BETA",
+    "titulo": "BETA",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/BETA/beta_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "caballeromia",
+    "nombre": "Caballero Mia",
+    "titulo": "Caballero",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Caballero Mia/caballero_mia_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "caribaymercedes",
+    "nombre": "Caribay Mercedes",
+    "titulo": "Caribay",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Caribay Mercedes/caribay_mercedes_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "colmeranesvaleria",
+    "nombre": "Colmeranes Valeria",
+    "titulo": "Colmeranes",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Colmeranes Valeria/colmeranes_valeria_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "dearcoaleejandra",
+    "nombre": "De Arco Aleejandra",
+    "titulo": "Arco",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/De Arco Aleejandra/de_arco_aleejandra_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "delgadomikael",
+    "nombre": "Delgado Mikael",
+    "titulo": "Delgado",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Delgado Mikael/delgado_mikael_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "Diana",
+    "nombre": "Diana",
+    "titulo": "Diana",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Diana/diana_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "floresvaleria",
+    "nombre": "Flores Valeria",
+    "titulo": "Flores",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Flores Valeria/flores_valeria_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "gamerovictoria",
+    "nombre": "Gamero Victoria",
+    "titulo": "Gamero",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Gamero Victoria/gamero_victoria_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "gomezcamila",
+    "nombre": "Gomez Camila",
+    "titulo": "Gomez",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Gomez Camila/gomez_camila_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "guaidóissis",
+    "nombre": "Guaidó Issis",
+    "titulo": "Guaidó",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Guaidó Issis/guaidó_issis_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "guerranicole",
+    "nombre": "Guerra Nicole",
+    "titulo": "Guerra",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Guerra Nicole/guerra_nicole_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "haggaramanda",
+    "nombre": "Haggar Amanda",
+    "titulo": "Haggar",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Haggar Amanda/haggar_amanda_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "maurizio",
+    "nombre": "Maurizio",
+    "titulo": "Maurizio",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Maurizio/maurizio_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "melendezluis",
+    "nombre": "Melendez Luis",
+    "titulo": "Melendez",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Melendez Luis/melendez_luis_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "milanojuan",
+    "nombre": "Milano Juan",
+    "titulo": "Milano",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Milano Juan/milano_juan_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "obremullerfabiana",
+    "nombre": "Obremuller Fabiana",
+    "titulo": "Obremuller",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Obremuller Fabiana/obremuller_fabiana_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "osiris",
+    "nombre": "Osiris",
+    "titulo": "Osiris",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Osiris/osiris_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "peñalozagabriel",
+    "nombre": "Peñaloza Gabriel",
+    "titulo": "Peñaloza",
+    "genero": "hombre",
+    "fotos": ["src/assets/modelos/Peñaloza Gabriel/peñaloza_gabriel_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "perezfabiana",
+    "nombre": "Perez Fabiana",
+    "titulo": "Perez",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Perez Fabiana/perez_fabiana_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  },
+  {
+    "id": "pierinapirela",
+    "nombre": "Pierina Pirela",
+    "titulo": "Pierina",
+    "genero": "mujer",
+    "fotos": ["src/assets/modelos/Pierina Pirela/pierina_pirela_1.webp"],
+    "atributos": {
+      "altura": "170 CM",
+      "busto": "86 CM",
+      "cintura": "64 CM"
+    }
+  }
 ]

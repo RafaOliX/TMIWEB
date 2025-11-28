@@ -66,39 +66,38 @@
   return;
 }
 
+      // Usar atributos del JSON
+      const atributos = modelo.atributos || {};
+      // Lista de atributos principales para mostrar en orden
+      const keys = [
+        {key: 'altura', label: 'ALTURA'},
+        {key: 'busto', label: 'BUSTO'},
+        {key: 'cintura', label: 'CINTURA'},
+        {key: 'cadera', label: 'CADERA'},
+        {key: 'cabello', label: 'CABELLO'},
+        {key: 'peso', label: 'PESO'}
+      ];
+
+      // Generar lista de atributos principales
+      const atributosHtml = keys.map(({key, label}) => {
+        return atributos[key] ? `<li><span class="text-xl text-white font-normal">${label}:</span> ${atributos[key]}</li>` : "";
+      }).join('');
+
       document.getElementById('modelo-detalle').innerHTML = `
         <!-- Columna de datos -->
         <div class="w-full md:w-1/2 p-5 sm:p-8 md:p-10 flex flex-col justify-center bg-stone-950 text-white">
-          <h1 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight break-words">${modelo.nombre.toUpperCase()}</h1>
+          <h1 class="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight break-words">${modelo.titulo ? modelo.titulo.toUpperCase() : modelo.nombre.toUpperCase()}</h1>
           <hr class="border-stone-700 mb-6 w-16">
           <ul class="mb-6 space-y-2 text-lg font-semibold">
-            ${modelo.altura ? `<li><span class="text-xl text-white font-normal">ALTURA:</span> ${modelo.altura}</li>` : ""}
-            ${modelo.busto ? `<li><span class="text-xl text-white font-normal">BUSTO:</span> ${modelo.busto}</li>` : ""}
-            ${modelo.cintura ? `<li><span class="text-xl text-white font-normal">CINTURA:</span> ${modelo.cintura}</li>` : ""}
-            ${modelo.cadera ? `<li><span class="text-xl text-white font-normal">CADERA:</span> ${modelo.cadera}</li>` : ""}
+            ${atributosHtml}
           </ul>
-          ${
-            (modelo.franela || modelo.pantalon || modelo.zapato || modelo.ojos || modelo.cabello)
-              ? `
-  <div class="bg-white text-stone-900 rounded-lg p-4 mb-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-base">
-      ${modelo.franela ? `<div class="truncate"><span class="text-black font-bold">FRANELA </span>${modelo.franela}</div>` : ""}
-      ${modelo.pantalon ? `<div class="truncate"><span class="text-black font-bold">PANTALÓN </span>${modelo.pantalon}</div>` : ""}
-      ${modelo.zapato ? `<div class="truncate"><span class="text-black font-bold">ZAPATOS </span>${modelo.zapato}</div>` : ""}
-      ${modelo.ojos ? `<div class="truncate"><span class="text-black font-bold">OJOS </span>${modelo.ojos}</div>` : ""}
-      ${modelo.cabello ? `<div class="truncate"><span class="text-black font-bold">CABELLO </span>${modelo.cabello}</div>` : ""}
-    </div>
-  </div>
-  ` : ""
-          }
           <p class="mb-6 text-gray-300 text-base">${modelo.descripcion || ""}</p>
           <a href="modelos.html" class="inline-block bg-white text-black px-4 py-2 rounded hover:bg-stone-200 font-semibold transition text-sm sm:text-base">Volver a modelos</a>
         </div>
         <!-- Columna de foto -->
         <div class="w-full md:w-1/2 flex items-center justify-center bg-stone-950">
-          <img src="${modelo.foto}" alt="${modelo.nombre}" class="object-contain w-full h-auto sm:h-80 md:h-full md:max-h-[36rem] bg-black rounded-b-lg md:rounded-none md:rounded-r-lg">
+          <img src="${(modelo.fotos && modelo.fotos[0]) || modelo.foto || ''}" alt="${modelo.titulo ? modelo.titulo : modelo.nombre}" class="object-contain w-full h-auto sm:h-80 md:h-full md:max-h-[36rem] bg-black rounded-b-lg md:rounded-none md:rounded-r-lg">
         </div>
-
       `;
     });
 </script>

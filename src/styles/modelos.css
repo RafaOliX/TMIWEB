@@ -86,6 +86,23 @@ header {
   transform-origin: center center;
 }
 
+/* Asegurar que los atributos sean visibles y legibles */
+.model-info {
+  min-height: 120px; /* deja espacio para título + atributos */
+  padding: 1rem; /* espacio interno para que no se recorten */
+}
+
+.model-info .model-attr {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+  line-height: 1.2;
+  z-index: 3;
+  position: relative;
+}
+
 .model-info h2 {
   font-size: 2vw;
   font-weight: 900;
